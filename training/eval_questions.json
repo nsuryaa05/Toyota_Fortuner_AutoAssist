@@ -1,0 +1,1366 @@
+[
+ {
+  "id": "Q001",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "My engine is overheating, what should I do?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    418
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    419
+   ]
+  ],
+  "anchor": "overheat"
+ },
+ {
+  "id": "Q002",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "Temperature gauge needle is in the red zone while driving",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    418
+   ]
+  ],
+  "anchor": "red zone"
+ },
+ {
+  "id": "Q003",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "How much coolant does the engine hold?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    431
+   ]
+  ],
+  "anchor": "coolant capacity"
+ },
+ {
+  "id": "Q004",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "Which coolant should I use to top up?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    323
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    431
+   ]
+  ],
+  "anchor": "Super Long Life"
+ },
+ {
+  "id": "Q005",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I check the coolant level?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    322
+   ]
+  ],
+  "anchor": "coolant level is satisfactory"
+ },
+ {
+  "id": "Q006",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "Battery is dead, how do I jump start the vehicle?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    413
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    414
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    415
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    416
+   ]
+  ],
+  "anchor": "jumper|discharged"
+ },
+ {
+  "id": "Q007",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "Starter motor does not turn and the interior lights are dim",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    410
+   ]
+  ],
+  "anchor": "starter motor does not turn"
+ },
+ {
+  "id": "Q008",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "The smart key is not working, how can I start the engine?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    411
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    412
+   ]
+  ],
+  "anchor": "electronic key does not operate"
+ },
+ {
+  "id": "Q009",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I replace the key fob battery?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    351
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    352
+   ]
+  ],
+  "anchor": "CR2032"
+ },
+ {
+  "id": "Q010",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "I have a flat tyre, how do I change to the spare?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    396
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    401
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    402
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    403
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    404
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    405
+   ]
+  ],
+  "anchor": "spare tire"
+ },
+ {
+  "id": "Q011",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What torque should the wheel nuts be tightened to?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    405
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    434
+   ]
+  ],
+  "anchor": "105 N"
+ },
+ {
+  "id": "Q012",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What is the recommended tyre pressure?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    434
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    340
+   ]
+  ],
+  "anchor": "inflation pressure"
+ },
+ {
+  "id": "Q013",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "Where are the jack and the tool bag kept?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    397
+   ]
+  ],
+  "anchor": "Tool bag"
+ },
+ {
+  "id": "Q014",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "The AdBlue warning light came on, what does it mean?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    330
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    331
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    332
+   ]
+  ],
+  "anchor": "AdBlue"
+ },
+ {
+  "id": "Q015",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "Engine will not restart because AdBlue ran out, can I refill it myself?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    333
+   ]
+  ],
+  "anchor": "restarted|restart"
+ },
+ {
+  "id": "Q016",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I tow the vehicle after a breakdown?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    379
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    380
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    381
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    382
+   ]
+  ],
+  "anchor": "tow"
+ },
+ {
+  "id": "Q017",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "Vehicle is stuck in mud, how do I get it out?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    422
+   ]
+  ],
+  "anchor": "stuck"
+ },
+ {
+  "id": "Q018",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "I ran out of diesel and the engine stalled, how to restart?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    421
+   ]
+  ],
+  "anchor": "run out of fuel"
+ },
+ {
+  "id": "Q019",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What fuel does this vehicle use?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    435
+   ]
+  ],
+  "anchor": "diesel fuel"
+ },
+ {
+  "id": "Q020",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How to replace the cabin AC filter?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    344
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    345
+   ]
+  ],
+  "anchor": "air conditioning filter"
+ },
+ {
+  "id": "Q021",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I change the reverse light bulb?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    362
+   ]
+  ],
+  "anchor": "Back-up"
+ },
+ {
+  "id": "Q022",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I check whether a fuse is blown?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    357
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    358
+   ]
+  ],
+  "anchor": "fuse"
+ },
+ {
+  "id": "Q023",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What does the ABS warning light mean?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    387
+   ]
+  ],
+  "anchor": "ABS warning light"
+ },
+ {
+  "id": "Q024",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What does the power steering warning light mean?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    387
+   ]
+  ],
+  "anchor": "Power steering"
+ },
+ {
+  "id": "Q025",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I release the handbrake?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    196
+   ]
+  ],
+  "anchor": "Parking brake"
+ },
+ {
+  "id": "Q026",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What is Multi-terrain Select used for?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    252
+   ]
+  ],
+  "anchor": "Multi-terrain"
+ },
+ {
+  "id": "Q027",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "When should engine oil be changed if I drive on dusty roads?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    309
+   ]
+  ],
+  "anchor": "dusty"
+ },
+ {
+  "id": "Q028",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I add engine oil?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    320
+   ]
+  ],
+  "anchor": "Adding engine oil"
+ },
+ {
+  "id": "Q029",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I check the engine oil level with the dipstick?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    318
+   ]
+  ],
+  "anchor": "dipstick"
+ },
+ {
+  "id": "Q030",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "A warning buzzer keeps sounding while I drive",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    444
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    386
+   ]
+  ],
+  "anchor": "warning buzzer"
+ },
+ {
+  "id": "Q031",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "The car alarm went off by itself, how do I stop it?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    444
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    89
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    90
+   ]
+  ],
+  "anchor": "alarm"
+ },
+ {
+  "id": "Q032",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I inspect the 12 volt battery?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    323
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    324
+   ]
+  ],
+  "anchor": "12-volt battery"
+ },
+ {
+  "id": "Q033",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "symptom",
+  "question": "Engine does not start even though I press the start button",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    443
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    409
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    410
+   ]
+  ],
+  "anchor": "engine does not start|will not start|starter motor"
+ },
+ {
+  "id": "Q034",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "Message on the display says press brake harder to activate Stop & Start",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    240
+   ]
+  ],
+  "anchor": "Press Brake"
+ },
+ {
+  "id": "Q035",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "fact",
+  "question": "How long can the high voltage system stay charged after switching off?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    36
+   ]
+  ],
+  "anchor": "10 minutes"
+ },
+ {
+  "id": "Q036",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "fact",
+  "question": "What is the cable cut and where is it used?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    60
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    72
+   ]
+  ],
+  "anchor": "cable cut"
+ },
+ {
+  "id": "Q037",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "How do I disable the vehicle before a rescue?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    67
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    69
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    72
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    73
+   ]
+  ],
+  "anchor": "Disable|disconnect"
+ },
+ {
+  "id": "Q038",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "What if the ignition switch does not work when disabling the vehicle?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    72
+   ]
+  ],
+  "anchor": "inoperative"
+ },
+ {
+  "id": "Q039",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "What if I cannot identify the correct fuse to pull?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    69
+   ]
+  ],
+  "anchor": "pull ALL fuses"
+ },
+ {
+  "id": "Q040",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "fact",
+  "question": "What is the pressure inside the hydrogen tanks?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    120
+   ]
+  ],
+  "anchor": "70 MPa"
+ },
+ {
+  "id": "Q041",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "How should a burning vehicle be put out?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    138
+   ]
+  ],
+  "anchor": "copious"
+ },
+ {
+  "id": "Q042",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "What is the best way to tow a damaged vehicle?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    145
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    146
+   ]
+  ],
+  "anchor": "car carrier|flat bed"
+ },
+ {
+  "id": "Q043",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "How do I release the parking lock on a damaged vehicle?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    146
+   ]
+  ],
+  "anchor": "parking lock"
+ },
+ {
+  "id": "Q044",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "fact",
+  "question": "Can airbags still deploy after a crash?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    155
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    157
+   ]
+  ],
+  "anchor": "airbag"
+ },
+ {
+  "id": "Q045",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "fact",
+  "question": "Can the seat belt pretensioner still be live after an accident?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    169
+   ]
+  ],
+  "anchor": "remain powered"
+ },
+ {
+  "id": "Q046",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "How should the vehicle be stabilised with blocks before cutting?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    34
+   ]
+  ],
+  "anchor": "Crib"
+ },
+ {
+  "id": "Q047",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "howto",
+  "question": "How do I store a damaged vehicle that has a high voltage battery?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    150
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    151
+   ]
+  ],
+  "anchor": "Storing a Damaged Vehicle"
+ },
+ {
+  "id": "Q048",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "symptom",
+  "question": "Coolant from the traction battery has spilled, is it dangerous?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    133
+   ]
+  ],
+  "anchor": "Traction Battery Coolant"
+ },
+ {
+  "id": "Q049",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "symptom",
+  "question": "Is there an explosion risk from the sub-battery?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    113
+   ],
+   [
+    "Fortuner_Hilux_2026.pdf",
+    114
+   ]
+  ],
+  "anchor": "sub-battery"
+ },
+ {
+  "id": "Q050",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "fact",
+  "question": "What is a service plug?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    61
+   ]
+  ],
+  "anchor": "service plug"
+ },
+ {
+  "id": "Q051",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I adjust the valve clearance?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    9
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    10
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    11
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    12
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    13
+   ]
+  ],
+  "anchor": "VALVE CLEARANCE"
+ },
+ {
+  "id": "Q052",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I do a compression test on the engine?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    3
+   ]
+  ],
+  "anchor": "COMPRESSION"
+ },
+ {
+  "id": "Q053",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I measure camshaft runout?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    48
+   ]
+  ],
+  "anchor": "runout"
+ },
+ {
+  "id": "Q054",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I loosen the cylinder head bolts?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    72
+   ]
+  ],
+  "anchor": "cylinder head"
+ },
+ {
+  "id": "Q055",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What is the maximum warpage of the cylinder block surface?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    162
+   ]
+  ],
+  "anchor": "warpage"
+ },
+ {
+  "id": "Q056",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What is the standard piston oil clearance?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    163
+   ]
+  ],
+  "anchor": "oil clearance"
+ },
+ {
+  "id": "Q057",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What is the maximum oil clearance for the camshaft bearing caps?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    147
+   ]
+  ],
+  "anchor": "oil clearance"
+ },
+ {
+  "id": "Q058",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What torque for the exhaust manifold nuts?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    99
+   ]
+  ],
+  "anchor": "exhaust manifold"
+ },
+ {
+  "id": "Q059",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "Torque for the engine under cover bolts",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    8
+   ]
+  ],
+  "anchor": "under cover"
+ },
+ {
+  "id": "Q060",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I check the ignition timing with a timing light?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    2
+   ]
+  ],
+  "anchor": "timing light"
+ },
+ {
+  "id": "Q061",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I retighten the connecting rod cap bolts?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    150
+   ]
+  ],
+  "anchor": "cap bolts"
+ },
+ {
+  "id": "Q062",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "howto",
+  "question": "How do I remove the camshaft timing gear and the timing chain?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    73
+   ]
+  ],
+  "anchor": "timing chain"
+ },
+ {
+  "id": "Q063",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "fact",
+  "question": "What adhesive is used on the oil pressure switch?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    195
+   ]
+  ],
+  "anchor": "adhesive"
+ },
+ {
+  "id": "Q064",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "Why does it happen?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    418
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    419
+   ]
+  ],
+  "anchor": "overheat",
+  "history": [
+   {
+    "question": "My engine is overheating.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q065",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "How can I start it then?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    413
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    414
+   ]
+  ],
+  "anchor": "jumper|discharged",
+  "history": [
+   {
+    "question": "The 12-volt battery is dead.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q066",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "What should I tighten the nuts to?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    405
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    434
+   ]
+  ],
+  "anchor": "105 N",
+  "history": [
+   {
+    "question": "I am changing a flat tyre.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q067",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "Can I fill it myself?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    333
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    336
+   ]
+  ],
+  "anchor": "AdBlue",
+  "history": [
+   {
+    "question": "The AdBlue warning light is on.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q068",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "What should I do first?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    422
+   ]
+  ],
+  "anchor": "stuck",
+  "history": [
+   {
+    "question": "My vehicle is stuck in mud.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q069",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "Is it okay to use chains for that?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    381
+   ]
+  ],
+  "anchor": "cables or chains",
+  "history": [
+   {
+    "question": "I need to tow the vehicle.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q070",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "How do I restart it?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    421
+   ]
+  ],
+  "anchor": "run out of fuel",
+  "history": [
+   {
+    "question": "The engine stalled because it ran out of diesel.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q071",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "Which battery does it take?",
+  "relevant": [
+   [
+    "fortuner-48v-2025.pdf",
+    351
+   ],
+   [
+    "fortuner-48v-2025.pdf",
+    352
+   ]
+  ],
+  "anchor": "CR2032",
+  "history": [
+   {
+    "question": "I need to replace the battery in the electronic key.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q072",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "follow_up",
+  "question": "And what if the ignition switch is not working?",
+  "relevant": [
+   [
+    "Fortuner_Hilux_2026.pdf",
+    72
+   ]
+  ],
+  "anchor": "inoperative",
+  "history": [
+   {
+    "question": "How do I disable the vehicle for rescue?",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q073",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "follow_up",
+  "question": "How do I do it?",
+  "relevant": [
+   [
+    "Toyota-4Runner_2006.pdf",
+    9
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    10
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    11
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    12
+   ],
+   [
+    "Toyota-4Runner_2006.pdf",
+    13
+   ]
+  ],
+  "anchor": "VALVE CLEARANCE",
+  "history": [
+   {
+    "question": "I want to adjust the valve clearance.",
+    "answer": "I will explain."
+   }
+  ]
+ },
+ {
+  "id": "Q074",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "How do I rebuild the automatic transmission valve body?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q075",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "What is the cylinder head bolt tightening torque?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q076",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "How do I reprogram the ECU with a scan tool?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q077",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "Give me a recipe for chocolate cake",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q078",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "What is the price of a new Fortuner?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q079",
+  "model": "Fortuner 48v",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "How do I adjust the valve clearance?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q080",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "no_answer",
+  "question": "How do I replace the cabin air filter?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q081",
+  "model": "Fortuner Hilux",
+  "generation": "Gen 1",
+  "type": "no_answer",
+  "question": "What is the recommended tyre pressure?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q082",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "How do I jump start the battery?",
+  "relevant": [],
+  "anchor": ""
+ },
+ {
+  "id": "Q083",
+  "model": "Fortuner 4Runner",
+  "generation": "Gen 2",
+  "type": "no_answer",
+  "question": "What does the ABS warning light mean?",
+  "relevant": [],
+  "anchor": ""
+ }
+]

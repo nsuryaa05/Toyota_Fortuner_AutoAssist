@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block subtitle %}{{ subtitle }}{% endblock %}
+{% block actions %}{% if show_new %}<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOrder"><i
+    class="bi bi-plus-lg me-1"></i>New work order</button>{% endif %}{% endblock %}
+{% block content %}
+<div class="card-soft">
+  <form class="row g-2 mb-3" method="get">
+    <div class="col-sm-6 col-md-4"><input class="form-control" name="q" value="{{ request.args.get('q', '') }}"
+        placeholder="Search order, issue or vehicle"></div>
+    <div class="col-sm-4 col-md-3"><select class="form-select" name="status">
+        <option value="">All statuses</option>
+        {% for s in statuses %}<option {{ 'selected' if request.args.get('status')==s }}>{{ s }}</option>{% endfor %}
+      </select></div>
+    <div class="col-auto"><button class="btn btn-outline-primary"><i class="bi bi-funnel me-1"></i>Filter</button></div>
+  </form>
+  {% if orders %}<div class="table-wrap">
+    <table class="table table-modern">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Vehicle</th>
+          <th>Issue</th>{% if me.role != TECH %}<th>Technician</th>{% endif %}<th>Risk</th>{% if show_approval %}<th>
+            Approval</th>{% endif %}<th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>{% for o in orders %}<tr>
+          <td><a class="fw-semibold text-decoration-none" href="{{ url_for('order_detail', code=o.code) }}" {% if popup
+              %} data-popup="{{ popup }}" data-code="{{ o.code }}" {% endif %}>{{ o.code }}</a></td>
+          <td>{{ o.model }}, {{ o.generation }}{% if o.vehicle %}<div class="hint">{{ o.vehicle.asset_id }}</div>{%
+            endif %}</td>
+          <td class="text-truncate" style="max-width:300px">{{ o.issue }}</td>
+          {% if me.role != TECH %}<td>{{ o.technician.full_name }}</td>{% endif %}
+          <td><span class="pill {{ 'pill-bad' if o.risk == 'High' else 'pill-warn' if o.risk == 'Medium' else '' }}">{{
+              o.risk }}</span></td>
+          {% if show_approval %}<td><span
+              class="pill {{ 'pill-ok' if o.approval == 'Approved' else 'pill-warn' if o.approval == 'Pending' else 'pill-bad' if o.approval == 'Rejected' else '' }}">{{
+              o.approval }}</span></td>{% endif %}
+          <td><span class="pill pill-blue">{{ o.status }}</span></td>
+          <td class="text-nowrap">{{ o.created_at|dt }}</td>
+        </tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  {% else %}<div class="empty"><i class="bi bi-clipboard"></i>No work orders match.</div>{% endif %}
+</div>
+
+{% if show_new %}
+<div class="modal fade" id="newOrder" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <form class="modal-content" method="post" action="{{ url_for('order_new') }}" data-loading="Creating…">{{ csrf_input
+      }}
+      <div class="modal-header">
+        <h5 class="modal-title">New work order</h5><button type="button" class="btn-close"
+          data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-8"><label class="form-label">Registered vehicle</label>
+            <select class="form-select" name="vehicle_id" required>
+              <option value="">Choose a vehicle…</option>
+              {% for v in vehicles %}<option value="{{ v.id }}">{{ v.asset_id }}: {{ v.model }}, {{ v.generation }}
+              </option>{% endfor %}
+            </select>
+            <div class="hint mt-1">Not listed? Register it first in <a href="{{ url_for('vehicles') }}">Vehicles
+                </a>.</div>
+          </div>
+          <!-- <div class="col-md-4"><label class="form-label">Priority</label><select class="form-select" name="priority">
+              <option>Normal</option>
+              <option>High</option>
+            </select></div> -->
+          <div class="col-12"><label class="form-label">Reported issue</label><textarea class="form-control"
+              name="issue" rows="3" maxlength="2200" required></textarea></div>
+          {% set field_statuses = TECH_STATUSES %}{% set o = none %}{% set status_locked = false %}{% include
+          "_tech_fields.html" %}
+        </div>
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-light"
+          data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="submit">Create work
+          order</button></div>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+{% if popup == 'approval' %}
+<div class="modal fade" id="approvalModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <form class="modal-content" method="post" id="approvalForm" data-loading="Saving…">{{ csrf_input }}
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title">High-risk approval decision</h5>
+          <div class="hint">Record the scope, evidence context and reasons.</div>
+        </div><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger py-2">A decision in this demo is a workflow record only. It is not an
+          authorization to perform a real hazardous repair.</div>
+        <div class="ai-box mb-3" id="apSummary" style="white-space:normal"></div>
+        <div id="apDecided" class="alert alert-secondary d-none"></div>
+        <div id="apFields">
+          <label class="form-label" for="apScope">Action scope</label>
+          <textarea class="form-control mb-3" id="apScope" name="scope" rows="3" maxlength="2200"
+            placeholder="Exactly what work is approved (needed for an approval)"></textarea>
+          <label class="form-label" for="apNotes">Review notes</label>
+          <textarea class="form-control" id="apNotes" name="comment" rows="3" maxlength="1000" required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-start" id="apButtons">
+        <button class="btn btn-success" name="decision" value="Approved" type="submit">Record approval</button>
+        <button class="btn btn-outline-danger" name="decision" value="Rejected" type="submit">Reject</button>
+        <button class="btn btn-outline-secondary" name="decision" value="Returned for evidence" type="submit">Return for
+          evidence</button>
+        <a class="btn btn-link ms-auto" id="apOpen" href="#">Open full work order</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% elif popup == 'closure' %}
+<div class="modal fade" id="closureModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <form class="modal-content" method="post" id="closureForm" data-loading="Saving…">{{ csrf_input }}
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title">Diagnosis and closure</h5>
+          <div class="hint">A work order can only be closed with diagnosis and verification notes.</div>
+        </div><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="ai-box mb-3" id="clSummary" style="white-space:normal"></div>
+        <label class="form-label" for="clDiag">Final diagnosis</label>
+        <textarea class="form-control mb-3" id="clDiag" name="diagnosis" rows="3" maxlength="2200"></textarea>
+        <label class="form-label" for="clVer">Verification / observed result</label>
+        <textarea class="form-control mb-3" id="clVer" name="verification" rows="3" maxlength="2200"></textarea>
+        <label class="form-label" for="clOut">Outcome / additional notes</label>
+        <textarea class="form-control" id="clOut" name="outcome" rows="3" maxlength="2200"></textarea>
+      </div>
+      <div class="modal-footer justify-content-start" id="clButtons">
+        <button class="btn btn-outline-danger" name="action" value="save" type="submit">Save diagnosis</button>
+        <button class="btn btn-danger" name="action" value="close" type="submit">Close work order</button>
+        <a class="btn btn-link ms-auto" id="clOpen" href="#">Open full work order</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+{% block scripts %}{% if popup %}
+<script>
+  var ORDERS = {{payloads| tojson }};
+  function summary(box, o) {
+    box.textContent = '';
+    function row(label, value) {var d = document.createElement('div'), b = document.createElement('b'); b.textContent = label + ': '; d.append(b, document.createTextNode(value || '-')); box.append(d);}
+    row('Work order', o.code + ' · ' + o.vehicle); row('Reported issue', o.issue);
+    row('Technician', o.technician + ' · ' + o.status); row('Findings', o.findings); row('Actions taken', o.actions_taken);
+    row('Parts used', o.parts); row('Hours spent', String(o.hours)); row('Risk', o.risk);
+    if (o.review_gap) row('Evidence gap', o.review_gap);
+  }
+  function fill(id, value) {document.getElementById(id).value = value || '';}
+  document.querySelectorAll('a[data-popup]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var o = ORDERS[a.dataset.code]; if (!o) return; e.preventDefault();
+      if (a.dataset.popup === 'approval') {
+        var form = document.getElementById('approvalForm'), pending = o.approval === 'Pending';
+        form.action = o.approval_url; summary(document.getElementById('apSummary'), o);
+        document.getElementById('apOpen').href = o.detail_url;
+        document.getElementById('apFields').classList.toggle('d-none', !pending);
+        document.querySelectorAll('#apButtons button').forEach(function (b) {b.classList.toggle('d-none', !pending);});
+        var done = document.getElementById('apDecided'); done.classList.toggle('d-none', pending);
+        done.textContent = o.approval === 'Returned for evidence' ? 'Returned to the technician for more evidence. It comes back here after you review it again.'
+          : 'Decision recorded: ' + o.approval + (o.scope ? '. Scope: ' + o.scope : '');
+        fill('apScope', ''); fill('apNotes', '');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('approvalModal')).show();
+      } else {
+        var f = document.getElementById('closureForm'); f.action = o.closure_url; summary(document.getElementById('clSummary'), o);
+        document.getElementById('clOpen').href = o.detail_url;
+        fill('clDiag', o.diagnosis); fill('clVer', o.verification); fill('clOut', o.outcome);
+        f.querySelectorAll('textarea').forEach(function (t) {t.readOnly = o.closed;});
+        document.querySelectorAll('#clButtons button').forEach(function (b) {b.classList.toggle('d-none', o.closed);});
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('closureModal')).show();
+      }
+    });
+  });
+  // Scope is needed only to approve; diagnosis and verification only to close.
+  var ap = document.getElementById('apButtons');
+  if (ap) ap.querySelectorAll('button').forEach(function (b) {b.addEventListener('click', function () {document.getElementById('apScope').required = b.value === 'Approved';});});
+  var cl = document.getElementById('clButtons');
+  if (cl) cl.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.getElementById('clDiag').required = document.getElementById('clVer').required = b.value === 'close';
+    });
+  });
+</script>{% endif %}{% endblock %}

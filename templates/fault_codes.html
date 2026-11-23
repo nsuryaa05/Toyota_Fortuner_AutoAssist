@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Fault Codes{% endblock %}
+{% block subtitle %}Enter a fault code (DTC) such as P0171 to see what it means, the likely causes and what to check.{%
+endblock %}
+{% block content %}
+<div class="card-soft">
+  <form class="row g-2 align-items-end" method="get">
+    <div class="col-md-5"><label class="form-label" for="codeIn">Fault code or keyword</label>
+      <input class="form-control form-control-lg" id="codeIn" name="code" value="{{ q }}"
+        placeholder="e.g. P0171, or &quot;misfire&quot;" maxlength="80" autocomplete="off" autofocus required>
+    </div>
+    <!-- <div class="col-md-4"><label class="form-label" for="vehIn">Vehicle <span class="hint">(optional)</span></label>
+      <select class="form-select form-select-lg" id="vehIn" name="vehicle">
+        <option value="">All vehicles</option>
+        {% for m, gn in pairs %}<option value="{{ m }}||{{ gn }}" {{ 'selected' if chosen==m ~ '||' ~ gn }}>{{ m }}, {{
+          gn }}</option>{% endfor %}
+      </select>
+    </div> -->
+    <div class="col-auto"><button class="btn btn-primary btn-lg"><i class="bi bi-search me-1"></i>Look up</button></div>
+  </form>
+  <div class="hint mt-2">{{ total }} fault code entries available.</div>
+</div>
+
+{% if total == 0 %}
+<div class="card-soft">
+  <div class="empty"><i class="bi bi-exclamation-diamond"></i>No fault code list has been uploaded yet. Ask an
+    administrator to upload one in Fault Code Management.</div>
+</div>
+{% elif q %}
+{% if results %}
+<div class="hint mb-2">{{ results|length }} result{{ 's' if results|length != 1 }} for <b>{{ q }}</b>{% if mode ==
+  'keyword' %} (keyword search){% endif %}</div>
+{% for r in results %}
+<div class="card-soft">
+  <div class="card-title-row">
+    <h2><span class="pill pill-blue fs-6 me-2">{{ r.code }}</span>{{ r.description }}</h2>
+    <span class="hint">{% if r.model %}{{ r.model }}{% if r.generation %}, {{ r.generation }}{% endif %}{% else %}All
+      vehicles{% endif %}</span>
+  </div>
+  <dl class="row mb-0">
+    {% if r.system %}<dt class="col-sm-3">System</dt>
+    <dd class="col-sm-9">{{ r.system }}</dd>{% endif %}
+    {% if r.causes %}<dt class="col-sm-3">Possible causes</dt>
+    <dd class="col-sm-9" style="white-space:pre-wrap">{{ r.causes }}</dd>{% endif %}
+    {% if r.action %}<dt class="col-sm-3">Recommended checks</dt>
+    <dd class="col-sm-9" style="white-space:pre-wrap">{{ r.action }}</dd>{% endif %}
+    <dt class="col-sm-3">Source</dt>
+    <dd class="col-sm-9 hint">{{ r.file.filename }}{% if r.page %}, page {{ r.page }}{% endif %}</dd>
+  </dl>
+</div>{% endfor %}
+<div class="hint">Fault code lists are a quick reference. Confirm the diagnosis against the repair manual for the
+  vehicle before replacing parts.
+  <a href="{{ url_for('chat') }}">Ask AutoAssist</a> for manual-based guidance.
+</div>
+{% else %}
+<div class="card-soft">
+  <div class="empty"><i class="bi bi-search"></i>No result for <b>{{ q }}</b>{% if chosen %} on the selected vehicle{%
+    endif %}.
+    {% if similar %}<div class="mt-3">Similar codes:
+      {% for c in similar %}<a class="pill pill-blue text-decoration-none me-1"
+        href="{{ url_for('fault_codes', code=c, vehicle=chosen) }}">{{ c }}</a>{% endfor %}</div>
+    {% else %}<div class="mt-2">Check the code, try "All vehicles", or ask an administrator to upload a list that
+      includes it.</div>{% endif %}</div>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

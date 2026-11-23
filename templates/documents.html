@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Document Management{% endblock %}
+{% block subtitle %}Upload manuals, choose the vehicle each one applies to, and watch them being indexed.{% endblock %}
+{% block content %}
+<div class="card-soft">
+  <h2>Upload PDFs</h2>
+  <form method="post" action="{{ url_for('upload_documents') }}" enctype="multipart/form-data" id="uploadForm" data-loading="Uploading…">{{ csrf_input }}
+    <label class="form-label" for="pdfInput">PDF files (you can select several)</label>
+    <input class="form-control mb-3" type="file" name="pdfs" id="pdfInput" accept="application/pdf,.pdf" multiple required>
+    <div id="metaList"></div>
+    <datalist id="modelList">{% for m in models %}<option value="{{ m }}"></option>{% endfor %}</datalist>
+    <datalist id="genList">{% for gn in generations %}<option value="{{ gn }}"></option>{% endfor %}</datalist>
+    <button class="btn btn-primary" type="submit"><i class="bi bi-cloud-upload me-1"></i>Upload and process</button>
+    <span class="hint ms-2">Processing starts automatically. The model and generation you enter appear in the technician's chat dropdown once the PDF is indexed.</span>
+  </form>
+</div>
+
+<div class="card-soft">
+  <div class="card-title-row"><h2>Documents ({{ docs|length }})</h2>
+    <span class="hint">Index: {{ rag.chunks }} passages, {{ rag.vectors }} vectors{{ '' if rag.in_sync else ' (out of sync: reprocess a document)' }} · OCR {{ 'available' if ocr_ready else 'not installed' }}</span></div>
+  <form class="row g-2 mb-3" method="get"><div class="col-sm-6 col-md-4"><input class="form-control" name="q" value="{{ q }}" placeholder="Search file, model or generation"></div>
+    <div class="col-auto"><button class="btn btn-outline-primary"><i class="bi bi-search me-1"></i>Search</button></div></form>
+  {% if docs %}<div class="table-wrap"><table class="table table-modern">
+    <thead><tr><th>Document</th><th>Vehicle</th><th>Type</th><th>Status</th><th class="text-end">Pages</th><th class="text-end">Passages</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>{% for d in docs %}<tr data-id="{{ d.id }}" data-status="{{ d.status }}">
+      <td><b>{{ d.filename }}</b>{% if d.synthetic %}<div><span class="pill pill-warn">Synthetic / unverified</span></div>{% endif %}
+        <div class="hint">{{ d.uploaded_at|dt }}{% if d.uploader %} · {{ d.uploader.username }}{% endif %}</div></td>
+      <td>{% if d.applicability == 'general_dtc_reference' %}<span class="pill">General DTC</span>{% else %}{{ d.model }}<div class="hint">{{ d.generation }} · {{ d.year_range }}</div>{% endif %}</td>
+      <td>{{ document_types.get(d.document_type, d.document_type) }}</td>
+      <td><span class="pill {{ {'Indexed': 'pill-ok', 'Failed': 'pill-bad', 'Needs OCR': 'pill-warn'}.get(d.status, 'pill-busy') }}">
+        {% if d.status in ('Pending', 'Processing') %}<span class="spinner-border spinner-border-sm me-1" style="width:.7rem;height:.7rem"></span>{% endif %}{{ d.status }}</span>
+        {% if d.error_message %}<div class="hint mt-1" style="max-width:260px">{{ d.error_message }}</div>{% endif %}</td>
+      <td class="text-end">{{ d.page_count }}</td><td class="text-end">{{ d.chunk_count }}</td>
+      <td class="text-end text-nowrap">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('document_file', doc_id=d.id) }}" target="_blank" title="Open original PDF"><i class="bi bi-eye"></i></a>
+        <form class="d-inline" method="post" action="{{ url_for('document_reprocess', doc_id=d.id) }}" onsubmit="return confirm('Reprocess this PDF? Its search data will be rebuilt.');">{{ csrf_input }}
+          <button class="btn btn-sm btn-outline-primary" title="Reprocess" {{ 'disabled' if d.status in ('Pending', 'Processing') }}><i class="bi bi-arrow-repeat"></i></button></form>
+        <form class="d-inline" method="post" action="{{ url_for('document_delete', doc_id=d.id) }}" onsubmit="return confirm('Remove {{ d.filename }} from the index and delete the file?');">{{ csrf_input }}
+          <button class="btn btn-sm btn-outline-danger" title="Remove" {{ 'disabled' if d.status == 'Processing' }}><i class="bi bi-trash"></i></button></form>
+      </td></tr>{% endfor %}</tbody></table></div>
+  {% else %}<div class="empty"><i class="bi bi-file-earmark-pdf"></i>No documents yet. Upload a PDF above. Technicians can only get answers from indexed documents.</div>{% endif %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  var DOC_TYPES = {{ document_types|tojson }};
+  var input = document.getElementById('pdfInput'), list = document.getElementById('metaList');
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+  function field(label, control, cls) { var g = el('div', cls); g.append(el('label', 'form-label', label), control); return g; }
+  function text(name, placeholder, listId, max) {
+    var i = el('input', 'form-control'); i.name = name; i.placeholder = placeholder; i.maxLength = max; if (listId) i.setAttribute('list', listId); i.autocomplete = 'off'; return i; }
+  if (input) input.addEventListener('change', function () {
+    list.innerHTML = '';
+    Array.from(input.files).forEach(function (file, n) {
+      var card = el('div', 'meta-card'), row = el('div', 'row g-2');
+      card.append(el('div', 'fw-semibold mb-2', (n + 1) + '. ' + file.name));
+      var model = text('model', 'e.g. Fortuner 48v', 'modelList', 80), gen = text('generation', 'e.g. Gen 2', 'genList', 40), years = text('year_range', 'e.g. 2025-2027', '', 40);
+      model.required = gen.required = true;
+      var type = el('select', 'form-select'); type.name = 'document_type'; type.required = true; type.append(new Option('Choose type…', ''));
+      Object.keys(DOC_TYPES).forEach(function (k) { type.append(new Option(DOC_TYPES[k], k)); });
+      var gModel = field('Car model', model, 'col-md-3'), gGen = field('Generation', gen, 'col-md-3');
+      row.append(gModel, gGen, field('Document type', type, 'col-md-3'), field('Year', years, 'col-md-3'));
+      type.addEventListener('change', function () {            // a general DTC list is not tied to one model
+        var general = type.value === 'general_dtc';
+        gModel.style.display = gGen.style.display = general ? 'none' : ''; model.required = gen.required = !general; });
+      card.append(row); list.append(card);
+    });
+  });
+  // Refresh the page when a document finishes processing.
+  var rows = document.querySelectorAll('tr[data-status]');
+  var busy = Array.from(rows).some(function (r) { return r.dataset.status === 'Pending' || r.dataset.status === 'Processing'; });
+  if (busy) {
+    var timer = setInterval(function () {
+      fetch({{ url_for('documents_status')|tojson }}).then(function (r) { return r.json(); }).then(function (data) {
+        var changed = data.some(function (d) { var row = document.querySelector('tr[data-id="' + d.id + '"]'); return row && row.dataset.status !== d.status; });
+        if (changed) { clearInterval(timer); location.reload(); }
+      }).catch(function () {});
+    }, 3000);
+  }
+</script>
+{% endblock %}

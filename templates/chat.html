@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}AutoAssist Chat{% endblock %}
+{% block subtitle %}Choose the car model and generation, then describe the problem. Only that car's manuals are searched.{% endblock %}
+{% block content %}
+<div class="chat-shell">
+  <div class="chat-picker">
+    <div class="ico"><i class="bi bi-car-front-fill"></i></div>
+    <div class="pick"><label for="selModel">Car model</label><select class="form-select" id="selModel" {{ 'disabled' if not catalog }}></select></div>
+    <div class="pick"><label for="selGen">Generation</label><select class="form-select" id="selGen" disabled></select></div>
+    <div class="pick-info">
+      {% if selected %}<b>{{ selected[0] }}, {{ selected[1] }}</b>
+        <small>Searching {{ docs|length }} manual{{ '' if docs|length == 1 else 's' }}: {% for d in docs %}{{ d.filename }}{{ ', ' if not loop.last }}{% endfor %}</small>
+      {% elif catalog %}<small>Select a model and generation to start the chat.</small>
+      {% else %}<small>No manuals are indexed yet. Ask an administrator to upload one.</small>{% endif %}
+    </div>
+  </div>
+  {% if not ai_ready %}<div class="alert alert-warning py-2 mb-2">The AI key is not configured. Searches work, but answers cannot be generated until an administrator sets it.</div>{% endif %}
+
+  <div class="chat-log" id="log">
+    {% if not selected %}<div class="empty" id="welcome"><i class="bi bi-ui-radios"></i>Select a car model and generation above to start.</div>
+    {% elif not messages %}<div class="empty" id="welcome"><i class="bi bi-chat-square-text"></i>Ask about a fault, warning light or procedure.<br><span class="hint">Example: "Engine misfires and the check engine light is on."</span></div>{% endif %}
+    {% for m in messages %}
+    <div class="msg user"><div class="bubble">{{ m.question }}</div></div>
+    <div class="msg bot"><div class="bubble{{ ' err' if m.mode not in ('ok', 'partial', 'general_only') }}">{{ m.answer }}
+      {% if m.sources %}<div class="evidence"><small>Evidence</small>{% for s in m.sources[:1] %}<span class="ev-chip"><i class="bi bi-file-earmark-pdf"></i>{{ s.document }}, page {{ s.page }}</span>{% endfor %}</div>{% endif %}
+      {% if m.mode in ('ok', 'partial', 'general_only') %}<div class="bot-actions"><button class="btn btn-sm btn-outline-primary" onclick="openOrder({{ m.id }}, this)" data-q="{{ m.question }}"><i class="bi bi-clipboard-plus me-1"></i>Create work order</button></div>{% endif %}
+    </div></div>
+    {% endfor %}
+  </div>
+
+  <div class="composer">
+    <textarea class="form-control" id="q" rows="1" maxlength="1500" aria-label="Your question" {{ 'disabled' if not selected }}
+      placeholder="{{ 'Type the problem or symptom…' if selected else 'Select a car model and generation first…' }}"></textarea>
+    <button class="btn btn-primary send-btn" id="send" aria-label="Send" {{ 'disabled' if not selected }}><i class="bi bi-send-fill"></i></button>
+  </div>
+</div>
+
+{% if selected %}
+<div class="modal fade" id="orderModal" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-scrollable"><form class="modal-content" method="post" action="{{ url_for('order_new') }}" data-loading="Creating…">
+  {{ csrf_input }}<input type="hidden" name="chat_id" id="o_chat">
+  <div class="modal-header"><h5 class="modal-title">Create work order</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <p class="hint">For {{ selected[0] }}, {{ selected[1] }}. The AI answer is attached for the engineer.</p>
+    <label class="form-label">Reported issue</label><textarea class="form-control mb-3" name="issue" id="o_issue" rows="4" maxlength="2200" required></textarea>
+    <div class="row g-3">
+      <!-- <div class="col-sm-6"><label class="form-label">Priority</label><select class="form-select" name="priority"><option>Normal</option><option>High</option></select></div> -->
+      <!-- <div class="col-sm-6"><label class="form-label">Registered vehicle <span class="hint">(optional)</span></label>
+        <select class="form-select" name="vehicle_id"><option value="">Not selected</option>{% for v in order_vehicles %}<option value="{{ v.id }}">{{ v.asset_id }}</option>{% endfor %}</select></div> -->
+      {% set field_statuses = TECH_STATUSES %}{% set o = none %}{% set status_locked = false %}{% include "_tech_fields.html" %}
+    <!-- </div> -->
+  </div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="submit">Create work order</button></div>
+</form></div></div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+  var CATALOG = {{ catalog|tojson }}, SELECTED = {{ (selected or [])|tojson }};
+  var selModel = document.getElementById('selModel'), selGen = document.getElementById('selGen');
+  function fillModels() {
+    selModel.innerHTML = '<option value="">Select car model…</option>';
+    CATALOG.forEach(function (c) { selModel.add(new Option(c.model, c.model)); });
+    if (SELECTED.length) selModel.value = SELECTED[0];
+  }
+  function fillGens() {
+    selGen.innerHTML = '<option value="">Select generation…</option>';
+    var entry = CATALOG.find(function (c) { return c.model === selModel.value; });
+    (entry ? entry.generations : []).forEach(function (g) { selGen.add(new Option(g, g)); });
+    selGen.disabled = !entry;
+    if (SELECTED.length && selModel.value === SELECTED[0]) selGen.value = SELECTED[1];
+  }
+  fillModels(); fillGens();
+  selModel.addEventListener('change', fillGens);
+  selGen.addEventListener('change', function () {        // choosing the generation starts (or switches) the chat
+    if (selModel.value && selGen.value)
+      location.href = {{ url_for('chat')|tojson }} + '?model=' + encodeURIComponent(selModel.value) + '&generation=' + encodeURIComponent(selGen.value);
+  });
+
+  var logBox = document.getElementById('log'), box = document.getElementById('q'), sendBtn = document.getElementById('send'), busy = false;
+  var CSRF = {{ csrf_token|tojson }};
+  function scrollDown() { logBox.scrollTop = logBox.scrollHeight; }
+  scrollDown();
+  function add(cls, text) {
+    var w = document.getElementById('welcome'); if (w) w.remove();
+    var row = document.createElement('div'); row.className = 'msg ' + cls;
+    var b = document.createElement('div'); b.className = 'bubble'; b.textContent = text;
+    row.appendChild(b); logBox.appendChild(row); scrollDown(); return b;
+  }
+  function openOrder(id, btn) {
+    document.getElementById('o_chat').value = id; document.getElementById('o_issue').value = btn.dataset.q;
+    new bootstrap.Modal(document.getElementById('orderModal')).show();
+  }
+  async function ask() {
+    var text = box.value.trim(); if (!text || busy || !SELECTED.length) return;
+    busy = true; sendBtn.disabled = true; box.value = ''; box.style.height = 'auto';
+    add('user', text);
+    var wait = add('bot', ''); wait.innerHTML = '<span class="typing"><span></span><span></span><span></span></span>';
+    try {
+      var res = await fetch({{ url_for('api_ask')|tojson }}, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': CSRF},
+        body: JSON.stringify({question: text, model: SELECTED[0], generation: SELECTED[1]})});
+      var data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'The request failed.');
+      wait.textContent = data.answer;
+      if (['ok', 'partial', 'general_only'].indexOf(data.mode) < 0) wait.classList.add('err');
+      if (data.sources && data.sources.length) {
+        var ev = document.createElement('div'); ev.className = 'evidence'; ev.innerHTML = '<small>Evidence</small>';
+        data.sources.slice(0, 3).forEach(function (s) {
+          var c = document.createElement('span'); c.className = 'ev-chip'; c.innerHTML = '<i class="bi bi-file-earmark-pdf"></i>';
+          c.appendChild(document.createTextNode(s.document + ', page ' + s.page)); ev.appendChild(c);
+        });
+        wait.appendChild(ev);
+      }
+      if (['ok', 'partial', 'general_only'].indexOf(data.mode) >= 0 && data.id) {
+        var act = document.createElement('div'); act.className = 'bot-actions';
+        var btn = document.createElement('button'); btn.className = 'btn btn-sm btn-outline-primary'; btn.dataset.q = text;
+        btn.innerHTML = '<i class="bi bi-clipboard-plus me-1"></i>Create work order'; btn.onclick = function () { openOrder(data.id, btn); };
+        act.appendChild(btn); wait.appendChild(act);
+      }
+    } catch (err) {
+      wait.textContent = err.message || 'Could not reach the server. Check your connection and try again.'; wait.classList.add('err');
+    }
+    busy = false; sendBtn.disabled = false; scrollDown(); box.focus();
+  }
+  sendBtn.addEventListener('click', ask);
+  box.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(); } });
+  box.addEventListener('input', function () { box.style.height = 'auto'; box.style.height = Math.min(box.scrollHeight, 140) + 'px'; });
+</script>
+{% endblock %}

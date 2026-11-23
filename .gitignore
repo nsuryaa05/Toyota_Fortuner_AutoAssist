@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+app.log*
+.venv/
+venv/
+trained_models/
+training/evaluation_results.json
+training/chunk_catalog.csv
+logs/
+trained_models/
+training/reranker_comparison.json

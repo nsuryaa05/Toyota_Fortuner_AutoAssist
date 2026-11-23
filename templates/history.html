@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Related History{% endblock %}
+{% block subtitle %}{% if selected %}Earlier repairs for {{ selected[0] }}, {{ selected[1] }}.{% else %}Repair records
+for all car models.{% endif %}{% endblock %}
+{% block actions %}{% if me.role in (ENGINEER, ADMIN) %}<button class="btn btn-primary" data-bs-toggle="modal"
+  data-bs-target="#histModal"><i class="bi bi-plus-lg me-1"></i>Add record</button>{% endif %}{% endblock %}
+{% block content %}
+<div class="card-soft">
+  <form class="row g-2 mb-3" method="get">
+    <div class="col-sm-6 col-md-4"><select class="form-select" name="pair">
+        <option value="">All car models</option>
+        {% for m, gn in pairs %}<option value="{{ m }}||{{ gn }}" {{ 'selected' if selected and
+          selected[0]|lower==m|lower and selected[1]|lower==gn|lower }}>{{ m }}, {{ gn }}</option>{% endfor %}
+      </select></div>
+    <div class="col-auto"><button class="btn btn-outline-primary">Show</button></div>
+  </form>
+  {% if rows %}<div class="table-wrap">
+    <table class="table table-modern">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Car</th>
+          <th>Repair summary</th>
+          <th>Outcome</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>{% for r in rows %}<tr>
+          <td class="text-nowrap">{{ r.recorded_at|dt }}</td>
+          <td>{{ r.model }}, {{ r.generation }}{% if r.vehicle %}<div class="hint">{{ r.vehicle.asset_id }}</div>{%
+            endif %}</td>
+          <td style="min-width:260px">{{ r.summary }}</td>
+          <td>{{ r.outcome or '-' }}</td>
+          <td>{% if r.is_synthetic %}<span class="pill pill-warn">Synthetic</span>{% elif r.work_order %}<a
+              class="pill pill-blue text-decoration-none"
+              href="{{ url_for('order_detail', code=r.work_order.code) if me.role != ADMIN else '#' }}">{{
+              r.work_order.code }}</a>{% else %}<span class="pill">Manual entry</span>{% endif %}</td>
+        </tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  {% else %}<div class="empty"><i class="bi bi-clock-history"></i>No repair history yet. Closed work orders appear here
+    automatically.</div>{% endif %}
+</div>
+{% if me.role in (ENGINEER, ADMIN) %}
+<div class="modal fade" id="histModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" method="post" action="{{ url_for('history_add') }}" data-loading="Saving…">{{ csrf_input
+      }}
+      <datalist id="hModels">{% for m in pairs|map(attribute=0)|unique %}<option value="{{ m }}"></option>{% endfor
+        %}</datalist>
+      <datalist id="hGens">{% for gn in pairs|map(attribute=1)|unique %}<option value="{{ gn }}"></option>{% endfor
+        %}</datalist>
+      <div class="modal-header">
+        <h5 class="modal-title">Add history record</h5><button type="button" class="btn-close"
+          data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3 mb-3">
+          <div class="col-6"><label class="form-label">Car model</label><input class="form-control" name="model"
+              list="hModels" maxlength="80" value="{{ selected[0] if selected }}" required></div>
+          <div class="col-6"><label class="form-label">Generation</label><input class="form-control" name="generation"
+              list="hGens" maxlength="40" value="{{ selected[1] if selected }}" required></div>
+        </div>
+        <label class="form-label">Repair summary</label><textarea class="form-control mb-3" name="summary" rows="3"
+          maxlength="2000" required></textarea>
+        <label class="form-label">Outcome</label><input class="form-control mb-3" name="outcome" maxlength="1000">
+        <div class="form-check"><input class="form-check-input" type="checkbox" name="synthetic" id="syn"><label
+            class="form-check-label" for="syn">Synthetic / sample record (not a real repair)</label></div>
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-light"
+          data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="submit">Save record</button>
+      </div>
+    </form>
+  </div>
+</div>{% endif %}
+{% endblock %}

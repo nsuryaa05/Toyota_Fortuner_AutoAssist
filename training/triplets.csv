@@ -1,0 +1,304 @@
+﻿question,model,generation,positive_chunk_id,negative_chunk_id,split
+"My engine is overheating, what should I do?",Fortuner 48v,Gen 2,952162bbdfb721fda9db,c73913d8ac9c7026c36f,train
+"My engine is overheating, what should I do?",Fortuner 48v,Gen 2,45e4b56cc5eaf80f1e47,80b9f51c2a750dba6dc7,train
+"My engine is overheating, what should I do?",Fortuner 48v,Gen 2,952162bbdfb721fda9db,44d44f352ad40c36b006,train
+"My engine is overheating, what should I do?",Fortuner 48v,Gen 2,45e4b56cc5eaf80f1e47,8341191ebb257e53bb47,train
+"My engine is overheating, what should I do?",Fortuner 48v,Gen 2,952162bbdfb721fda9db,6fb3f865d3aef84b0c63,train
+"My engine is overheating, what should I do?",Fortuner 48v,Gen 2,45e4b56cc5eaf80f1e47,46440e1c80a0bb231dfa,train
+Temperature gauge needle is in the red zone while driving,Fortuner 48v,Gen 2,952162bbdfb721fda9db,80b9f51c2a750dba6dc7,test
+Temperature gauge needle is in the red zone while driving,Fortuner 48v,Gen 2,952162bbdfb721fda9db,a044ff6498e58c151ef2,test
+Temperature gauge needle is in the red zone while driving,Fortuner 48v,Gen 2,952162bbdfb721fda9db,99c110378e05f13c1bc0,test
+How much coolant does the engine hold?,Fortuner 48v,Gen 2,c92e5937c82f19e6b7ce,d816dc44a75b479b8ab8,train
+How much coolant does the engine hold?,Fortuner 48v,Gen 2,c92e5937c82f19e6b7ce,c73913d8ac9c7026c36f,train
+How much coolant does the engine hold?,Fortuner 48v,Gen 2,c92e5937c82f19e6b7ce,f17f003e58a830016206,train
+Which coolant should I use to top up?,Fortuner 48v,Gen 2,c73913d8ac9c7026c36f,ddfcb19750068561658b,validation
+Which coolant should I use to top up?,Fortuner 48v,Gen 2,c92e5937c82f19e6b7ce,f17f003e58a830016206,validation
+Which coolant should I use to top up?,Fortuner 48v,Gen 2,c73913d8ac9c7026c36f,004ac396a8b8ab5fcf85,validation
+Which coolant should I use to top up?,Fortuner 48v,Gen 2,c92e5937c82f19e6b7ce,1b1a7d405f7b103a5699,validation
+Which coolant should I use to top up?,Fortuner 48v,Gen 2,c73913d8ac9c7026c36f,6fb3f865d3aef84b0c63,validation
+Which coolant should I use to top up?,Fortuner 48v,Gen 2,c92e5937c82f19e6b7ce,44f99621042908d41e2c,validation
+How do I check the coolant level?,Fortuner 48v,Gen 2,acae1f0e0492e4209c18,45e4b56cc5eaf80f1e47,validation
+How do I check the coolant level?,Fortuner 48v,Gen 2,acae1f0e0492e4209c18,f17f003e58a830016206,validation
+How do I check the coolant level?,Fortuner 48v,Gen 2,acae1f0e0492e4209c18,6fb3f865d3aef84b0c63,validation
+"Battery is dead, how do I jump start the vehicle?",Fortuner 48v,Gen 2,0d091d5dca40943a951e,8af470df467b73e053ad,train
+"Battery is dead, how do I jump start the vehicle?",Fortuner 48v,Gen 2,e587af57df241841fc10,0550fc5dc9a429abc0d6,train
+"Battery is dead, how do I jump start the vehicle?",Fortuner 48v,Gen 2,0d091d5dca40943a951e,080576f781d0be6051b8,train
+"Battery is dead, how do I jump start the vehicle?",Fortuner 48v,Gen 2,e587af57df241841fc10,a675ba7cc62a7df1ab8e,train
+"Battery is dead, how do I jump start the vehicle?",Fortuner 48v,Gen 2,0d091d5dca40943a951e,1ca043249a5b7f1bde12,train
+"Battery is dead, how do I jump start the vehicle?",Fortuner 48v,Gen 2,e587af57df241841fc10,6f1e1d09a130f1835213,train
+Starter motor does not turn and the interior lights are dim,Fortuner 48v,Gen 2,a675ba7cc62a7df1ab8e,255a89b85085cb647f16,test
+Starter motor does not turn and the interior lights are dim,Fortuner 48v,Gen 2,a675ba7cc62a7df1ab8e,a010046500b9ad6ab2b9,test
+Starter motor does not turn and the interior lights are dim,Fortuner 48v,Gen 2,a675ba7cc62a7df1ab8e,4ecc2f36298441ccdd94,test
+"The smart key is not working, how can I start the engine?",Fortuner 48v,Gen 2,5dff8e146ec60d73a73e,faa5ab097232355d7eec,validation
+"The smart key is not working, how can I start the engine?",Fortuner 48v,Gen 2,9588f17ecfd1dbf7b662,88c01b6c1c902ce357e0,validation
+"The smart key is not working, how can I start the engine?",Fortuner 48v,Gen 2,5dff8e146ec60d73a73e,3c39426dd537400df6d4,validation
+"The smart key is not working, how can I start the engine?",Fortuner 48v,Gen 2,9588f17ecfd1dbf7b662,080576f781d0be6051b8,validation
+"The smart key is not working, how can I start the engine?",Fortuner 48v,Gen 2,5dff8e146ec60d73a73e,26a0df79e3ca2b021429,validation
+"The smart key is not working, how can I start the engine?",Fortuner 48v,Gen 2,9588f17ecfd1dbf7b662,519d2e3b02ee46f82e4b,validation
+How do I replace the key fob battery?,Fortuner 48v,Gen 2,d0c8f95bc42e15e0d7e8,3e32fe50cafc87c5c8bc,test
+How do I replace the key fob battery?,Fortuner 48v,Gen 2,2fb1fc4d83d55b847451,5dff8e146ec60d73a73e,test
+How do I replace the key fob battery?,Fortuner 48v,Gen 2,d0c8f95bc42e15e0d7e8,88c01b6c1c902ce357e0,test
+How do I replace the key fob battery?,Fortuner 48v,Gen 2,2fb1fc4d83d55b847451,c18297bf2b36cb4a1a08,test
+How do I replace the key fob battery?,Fortuner 48v,Gen 2,d0c8f95bc42e15e0d7e8,080576f781d0be6051b8,test
+How do I replace the key fob battery?,Fortuner 48v,Gen 2,2fb1fc4d83d55b847451,f34ddec5e792b328b3ac,test
+"I have a flat tyre, how do I change to the spare?",Fortuner 48v,Gen 2,a411f9f6bab7e64e28d1,49066adc6cc40214a11d,train
+"I have a flat tyre, how do I change to the spare?",Fortuner 48v,Gen 2,282ae0b913f1217f4d59,5dd8f9ce1f83b34c6483,train
+"I have a flat tyre, how do I change to the spare?",Fortuner 48v,Gen 2,a411f9f6bab7e64e28d1,5bc7d7ce5f57847a9ec9,train
+"I have a flat tyre, how do I change to the spare?",Fortuner 48v,Gen 2,282ae0b913f1217f4d59,8cb181f64eb763882cf3,train
+"I have a flat tyre, how do I change to the spare?",Fortuner 48v,Gen 2,a411f9f6bab7e64e28d1,e6fec233626c1c421035,train
+"I have a flat tyre, how do I change to the spare?",Fortuner 48v,Gen 2,282ae0b913f1217f4d59,6813b26cdff2393c9f65,train
+What torque should the wheel nuts be tightened to?,Fortuner 48v,Gen 2,282ae0b913f1217f4d59,740d8129f44f55c569aa,validation
+What torque should the wheel nuts be tightened to?,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,b26f050c26e6944c8715,validation
+What torque should the wheel nuts be tightened to?,Fortuner 48v,Gen 2,282ae0b913f1217f4d59,1e555b55e722e85acf56,validation
+What torque should the wheel nuts be tightened to?,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,add731ef508dd95bcd68,validation
+What torque should the wheel nuts be tightened to?,Fortuner 48v,Gen 2,282ae0b913f1217f4d59,35277248b47229ef3272,validation
+What torque should the wheel nuts be tightened to?,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,6cafb7e9ea062b9db5ac,validation
+What is the recommended tyre pressure?,Fortuner 48v,Gen 2,c9f22056fbf48f493f9a,bbc99da10257cd86f6d1,test
+What is the recommended tyre pressure?,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,c92083a5d121f528c63b,test
+What is the recommended tyre pressure?,Fortuner 48v,Gen 2,c9f22056fbf48f493f9a,fa682bc270ce7abd4caa,test
+What is the recommended tyre pressure?,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,16d9ced65fa93b3f5233,test
+What is the recommended tyre pressure?,Fortuner 48v,Gen 2,c9f22056fbf48f493f9a,03fe06abb8ea2b37c311,test
+What is the recommended tyre pressure?,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,5bc7d7ce5f57847a9ec9,test
+Where are the jack and the tool bag kept?,Fortuner 48v,Gen 2,e88e49e57f6626dcd282,710fc399b17591c0130b,train
+Where are the jack and the tool bag kept?,Fortuner 48v,Gen 2,e88e49e57f6626dcd282,1e555b55e722e85acf56,train
+Where are the jack and the tool bag kept?,Fortuner 48v,Gen 2,e88e49e57f6626dcd282,8cb181f64eb763882cf3,train
+"The AdBlue warning light came on, what does it mean?",Fortuner 48v,Gen 2,0c99ede04383c17d4df2,99f130a63b58328d78d4,train
+"The AdBlue warning light came on, what does it mean?",Fortuner 48v,Gen 2,ce96969aafd53cbb731a,d3b17783da8bbd5178a1,train
+"The AdBlue warning light came on, what does it mean?",Fortuner 48v,Gen 2,0c99ede04383c17d4df2,4615199e1765fe6e1c2d,train
+"The AdBlue warning light came on, what does it mean?",Fortuner 48v,Gen 2,ce96969aafd53cbb731a,ea8c27dba51beb0d4442,train
+"The AdBlue warning light came on, what does it mean?",Fortuner 48v,Gen 2,0c99ede04383c17d4df2,df2f8368408d769b5e5e,train
+"The AdBlue warning light came on, what does it mean?",Fortuner 48v,Gen 2,ce96969aafd53cbb731a,42d152ef6b4e807e7ce7,train
+"Engine will not restart because AdBlue ran out, can I refill it myself?",Fortuner 48v,Gen 2,43b344277af8308d3b72,c4608cd42c46d0b99121,test
+"Engine will not restart because AdBlue ran out, can I refill it myself?",Fortuner 48v,Gen 2,43b344277af8308d3b72,bb999d8774f47cbe0ca2,test
+"Engine will not restart because AdBlue ran out, can I refill it myself?",Fortuner 48v,Gen 2,43b344277af8308d3b72,1bea83380c07cbeb0a94,test
+How do I tow the vehicle after a breakdown?,Fortuner 48v,Gen 2,031c082ecce503653569,37faead1514763ced71a,train
+How do I tow the vehicle after a breakdown?,Fortuner 48v,Gen 2,ab3c93d3030121d8640f,d11d4c46f499e7162b57,train
+How do I tow the vehicle after a breakdown?,Fortuner 48v,Gen 2,031c082ecce503653569,9bf57cf6a4a31eff4b40,train
+How do I tow the vehicle after a breakdown?,Fortuner 48v,Gen 2,ab3c93d3030121d8640f,41902e97c16d9f9845e1,train
+How do I tow the vehicle after a breakdown?,Fortuner 48v,Gen 2,031c082ecce503653569,5bc7d7ce5f57847a9ec9,train
+How do I tow the vehicle after a breakdown?,Fortuner 48v,Gen 2,ab3c93d3030121d8640f,3f9eb03ae954b90bcc5d,train
+"Vehicle is stuck in mud, how do I get it out?",Fortuner 48v,Gen 2,25a3bc6e125bdd1ecc02,49066adc6cc40214a11d,train
+"Vehicle is stuck in mud, how do I get it out?",Fortuner 48v,Gen 2,25a3bc6e125bdd1ecc02,64286390c25e5f727b4a,train
+"Vehicle is stuck in mud, how do I get it out?",Fortuner 48v,Gen 2,25a3bc6e125bdd1ecc02,36469d391a900745ac3d,train
+"I ran out of diesel and the engine stalled, how to restart?",Fortuner 48v,Gen 2,e0c419b3d726dd823083,fc5f633fd7b933525f0d,train
+"I ran out of diesel and the engine stalled, how to restart?",Fortuner 48v,Gen 2,e0c419b3d726dd823083,ecb2953b5bbacbe4ce8d,train
+"I ran out of diesel and the engine stalled, how to restart?",Fortuner 48v,Gen 2,e0c419b3d726dd823083,281d5cfaeeed2b7ed261,train
+What fuel does this vehicle use?,Fortuner 48v,Gen 2,fc5f633fd7b933525f0d,ea60b0a6eee577c2e128,train
+What fuel does this vehicle use?,Fortuner 48v,Gen 2,fc5f633fd7b933525f0d,6d097b21c95e3edd50c5,train
+What fuel does this vehicle use?,Fortuner 48v,Gen 2,fc5f633fd7b933525f0d,57ac522f0f198b10918e,train
+How to replace the cabin AC filter?,Fortuner 48v,Gen 2,ff0e417d449a433a2cbd,42d152ef6b4e807e7ce7,train
+How to replace the cabin AC filter?,Fortuner 48v,Gen 2,5fd1f42907b78cec4f47,455fd7403368e83bd184,train
+How to replace the cabin AC filter?,Fortuner 48v,Gen 2,ff0e417d449a433a2cbd,1675eae36f8fe1a9122d,train
+How to replace the cabin AC filter?,Fortuner 48v,Gen 2,5fd1f42907b78cec4f47,3a2c0fc24ace5a84fe52,train
+How to replace the cabin AC filter?,Fortuner 48v,Gen 2,ff0e417d449a433a2cbd,b1d2775c80bacca9bae1,train
+How to replace the cabin AC filter?,Fortuner 48v,Gen 2,5fd1f42907b78cec4f47,d816dc44a75b479b8ab8,train
+How do I change the reverse light bulb?,Fortuner 48v,Gen 2,81949bf9aacf6abe8670,06ebae6f140d53ba82ee,train
+How do I change the reverse light bulb?,Fortuner 48v,Gen 2,81949bf9aacf6abe8670,4b1b19606899fdac489d,train
+How do I change the reverse light bulb?,Fortuner 48v,Gen 2,81949bf9aacf6abe8670,056fe96308cd77d12833,train
+How do I check whether a fuse is blown?,Fortuner 48v,Gen 2,cb459af6491b289adbe8,3164f5e8f32198f681c9,test
+How do I check whether a fuse is blown?,Fortuner 48v,Gen 2,d003dfb020bcc3436e6a,92e16c96b2bc2061f5a6,test
+How do I check whether a fuse is blown?,Fortuner 48v,Gen 2,cb459af6491b289adbe8,6f1e1d09a130f1835213,test
+How do I check whether a fuse is blown?,Fortuner 48v,Gen 2,d003dfb020bcc3436e6a,d944872cbe4161a4fc60,test
+How do I check whether a fuse is blown?,Fortuner 48v,Gen 2,cb459af6491b289adbe8,679915c52d22518f4698,test
+How do I check whether a fuse is blown?,Fortuner 48v,Gen 2,d003dfb020bcc3436e6a,c2e6a4d904602d150b36,test
+What does the ABS warning light mean?,Fortuner 48v,Gen 2,7d955f76caa0835f0916,99f130a63b58328d78d4,train
+What does the ABS warning light mean?,Fortuner 48v,Gen 2,7d955f76caa0835f0916,df2f8368408d769b5e5e,train
+What does the ABS warning light mean?,Fortuner 48v,Gen 2,7d955f76caa0835f0916,a7e4b723f1f82c116304,train
+What does the power steering warning light mean?,Fortuner 48v,Gen 2,7d955f76caa0835f0916,99f130a63b58328d78d4,validation
+What does the power steering warning light mean?,Fortuner 48v,Gen 2,7d955f76caa0835f0916,4f90be7dd884532930de,validation
+What does the power steering warning light mean?,Fortuner 48v,Gen 2,7d955f76caa0835f0916,df2f8368408d769b5e5e,validation
+How do I release the handbrake?,Fortuner 48v,Gen 2,a61b1a39abbce7279cb0,cd56ddada9c8b3a7851e,train
+How do I release the handbrake?,Fortuner 48v,Gen 2,a61b1a39abbce7279cb0,d6878676b0ca0bced80c,train
+How do I release the handbrake?,Fortuner 48v,Gen 2,a61b1a39abbce7279cb0,4555b790f482955620a1,train
+What is Multi-terrain Select used for?,Fortuner 48v,Gen 2,8326279e38665d68da48,1e0e8af556a345d1d476,test
+What is Multi-terrain Select used for?,Fortuner 48v,Gen 2,8326279e38665d68da48,b99c24b3130cdbdadb09,test
+What is Multi-terrain Select used for?,Fortuner 48v,Gen 2,8326279e38665d68da48,0dfac1c75d79cb25140d,test
+When should engine oil be changed if I drive on dusty roads?,Fortuner 48v,Gen 2,0d1a40ff1c74eee8c91c,f0e102a96cf9047a1a8b,validation
+When should engine oil be changed if I drive on dusty roads?,Fortuner 48v,Gen 2,0d1a40ff1c74eee8c91c,0c5eca00bc8f8118efee,validation
+When should engine oil be changed if I drive on dusty roads?,Fortuner 48v,Gen 2,0d1a40ff1c74eee8c91c,f564a0163246961b4a74,validation
+How do I add engine oil?,Fortuner 48v,Gen 2,3738c0941b8e100414aa,b739866a579edaa2717a,train
+How do I add engine oil?,Fortuner 48v,Gen 2,3738c0941b8e100414aa,f564a0163246961b4a74,train
+How do I add engine oil?,Fortuner 48v,Gen 2,3738c0941b8e100414aa,04f66ec33b9a5dcfad50,train
+How do I check the engine oil level with the dipstick?,Fortuner 48v,Gen 2,679915c52d22518f4698,3738c0941b8e100414aa,train
+How do I check the engine oil level with the dipstick?,Fortuner 48v,Gen 2,679915c52d22518f4698,f564a0163246961b4a74,train
+How do I check the engine oil level with the dipstick?,Fortuner 48v,Gen 2,679915c52d22518f4698,d2a165b082718f15c458,train
+A warning buzzer keeps sounding while I drive,Fortuner 48v,Gen 2,c08fccae4b4017b25ed0,1e7c018a128350a375bc,validation
+A warning buzzer keeps sounding while I drive,Fortuner 48v,Gen 2,c9a38f3399b826e54bda,da75af1ca32d78e0539e,validation
+A warning buzzer keeps sounding while I drive,Fortuner 48v,Gen 2,c08fccae4b4017b25ed0,75059766a139f40381d4,validation
+A warning buzzer keeps sounding while I drive,Fortuner 48v,Gen 2,c9a38f3399b826e54bda,d3b17783da8bbd5178a1,validation
+A warning buzzer keeps sounding while I drive,Fortuner 48v,Gen 2,c08fccae4b4017b25ed0,c0d0699eaa92bf930db0,validation
+A warning buzzer keeps sounding while I drive,Fortuner 48v,Gen 2,c9a38f3399b826e54bda,c5b771794e5f6f27fba3,validation
+"The car alarm went off by itself, how do I stop it?",Fortuner 48v,Gen 2,6dbf6696303ab69cf6ad,53846b4a4bcaeaaa61df,test
+"The car alarm went off by itself, how do I stop it?",Fortuner 48v,Gen 2,990727c6243b4181b16a,5dff8e146ec60d73a73e,test
+"The car alarm went off by itself, how do I stop it?",Fortuner 48v,Gen 2,6dbf6696303ab69cf6ad,c1df957585158e52af45,test
+"The car alarm went off by itself, how do I stop it?",Fortuner 48v,Gen 2,990727c6243b4181b16a,1ce40a12cd2d462a8b5d,test
+"The car alarm went off by itself, how do I stop it?",Fortuner 48v,Gen 2,6dbf6696303ab69cf6ad,cafbdce29271daf885c3,test
+"The car alarm went off by itself, how do I stop it?",Fortuner 48v,Gen 2,990727c6243b4181b16a,c82de3f9b23a6b439bee,test
+How do I inspect the 12 volt battery?,Fortuner 48v,Gen 2,8732e087dfd64644235e,e587af57df241841fc10,train
+How do I inspect the 12 volt battery?,Fortuner 48v,Gen 2,c73913d8ac9c7026c36f,bf86ad5d5e9949ea8f58,train
+How do I inspect the 12 volt battery?,Fortuner 48v,Gen 2,8732e087dfd64644235e,015cb55c53442bb0c05d,train
+How do I inspect the 12 volt battery?,Fortuner 48v,Gen 2,c73913d8ac9c7026c36f,f34ddec5e792b328b3ac,train
+How do I inspect the 12 volt battery?,Fortuner 48v,Gen 2,8732e087dfd64644235e,e392fc0b541880c51141,train
+How do I inspect the 12 volt battery?,Fortuner 48v,Gen 2,c73913d8ac9c7026c36f,98d91839efbe28f9eeb5,train
+Engine does not start even though I press the start button,Fortuner 48v,Gen 2,6f1e1d09a130f1835213,f8391f544d61b75dcb6f,validation
+Engine does not start even though I press the start button,Fortuner 48v,Gen 2,5ebf17a12028f2400557,080576f781d0be6051b8,validation
+Engine does not start even though I press the start button,Fortuner 48v,Gen 2,6f1e1d09a130f1835213,8af470df467b73e053ad,validation
+Engine does not start even though I press the start button,Fortuner 48v,Gen 2,5ebf17a12028f2400557,88c01b6c1c902ce357e0,validation
+Engine does not start even though I press the start button,Fortuner 48v,Gen 2,6f1e1d09a130f1835213,e7521a3bfe89ed4f9230,validation
+Engine does not start even though I press the start button,Fortuner 48v,Gen 2,5ebf17a12028f2400557,5dff8e146ec60d73a73e,validation
+Message on the display says press brake harder to activate Stop & Start,Fortuner 48v,Gen 2,1fd421bc0fef95f6913e,c08fccae4b4017b25ed0,test
+Message on the display says press brake harder to activate Stop & Start,Fortuner 48v,Gen 2,1fd421bc0fef95f6913e,54dfb8673d1d9e626ff3,test
+Message on the display says press brake harder to activate Stop & Start,Fortuner 48v,Gen 2,1fd421bc0fef95f6913e,095d15d09fd998c717a8,test
+How long can the high voltage system stay charged after switching off?,Fortuner Hilux,Gen 1,e783fde7d69e96cd6cd3,a682403fce8114a38318,train
+How long can the high voltage system stay charged after switching off?,Fortuner Hilux,Gen 1,e783fde7d69e96cd6cd3,0e1042787da33cd78378,train
+How long can the high voltage system stay charged after switching off?,Fortuner Hilux,Gen 1,e783fde7d69e96cd6cd3,fc79e4f2be173e0552c1,train
+What is the cable cut and where is it used?,Fortuner Hilux,Gen 1,bca72be7389e0b70ab5f,7ea6a72784cff9583d6c,test
+What is the cable cut and where is it used?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,eedb1b167260fda35004,test
+What is the cable cut and where is it used?,Fortuner Hilux,Gen 1,bca72be7389e0b70ab5f,0ca11247a7c14a72ee93,test
+What is the cable cut and where is it used?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,681ffff5f4f2fa0a8de9,test
+What is the cable cut and where is it used?,Fortuner Hilux,Gen 1,bca72be7389e0b70ab5f,dabf54894eddfb21ef55,test
+What is the cable cut and where is it used?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,673743e8a444a65e9a36,test
+How do I disable the vehicle before a rescue?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,12f56ecf794be0a5ffd9,train
+How do I disable the vehicle before a rescue?,Fortuner Hilux,Gen 1,c6c913fb20aa2f5d82c2,e783fde7d69e96cd6cd3,train
+How do I disable the vehicle before a rescue?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,32cc203d8fbf99622561,train
+How do I disable the vehicle before a rescue?,Fortuner Hilux,Gen 1,c6c913fb20aa2f5d82c2,e33c4791525753d1636f,train
+How do I disable the vehicle before a rescue?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,9b6e2ae98038d7fcd750,train
+How do I disable the vehicle before a rescue?,Fortuner Hilux,Gen 1,c6c913fb20aa2f5d82c2,45bb5398f034eb8da598,train
+What if the ignition switch does not work when disabling the vehicle?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,6a687e49b57ff72231b2,train
+What if the ignition switch does not work when disabling the vehicle?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,427e2c02a91e842d58de,train
+What if the ignition switch does not work when disabling the vehicle?,Fortuner Hilux,Gen 1,a4006801195d3b19407d,b5eb72f96d1aec14437d,train
+What if I cannot identify the correct fuse to pull?,Fortuner Hilux,Gen 1,3a0a463436fd2a886580,244902d0e660e615b277,validation
+What if I cannot identify the correct fuse to pull?,Fortuner Hilux,Gen 1,3a0a463436fd2a886580,673743e8a444a65e9a36,validation
+What if I cannot identify the correct fuse to pull?,Fortuner Hilux,Gen 1,3a0a463436fd2a886580,9f5508f2dc8f36a5a54f,validation
+What is the pressure inside the hydrogen tanks?,Fortuner Hilux,Gen 1,d36489133d839756a1f9,75c3bb10968a601308fd,train
+What is the pressure inside the hydrogen tanks?,Fortuner Hilux,Gen 1,d36489133d839756a1f9,d37ffc8773b2950645d4,train
+What is the pressure inside the hydrogen tanks?,Fortuner Hilux,Gen 1,d36489133d839756a1f9,82555db2a1887d1109dc,train
+How should a burning vehicle be put out?,Fortuner Hilux,Gen 1,374f90b47053a3626762,82555db2a1887d1109dc,train
+How should a burning vehicle be put out?,Fortuner Hilux,Gen 1,374f90b47053a3626762,d38badcf894d0afb0349,train
+How should a burning vehicle be put out?,Fortuner Hilux,Gen 1,374f90b47053a3626762,67998c007191d049c6e2,train
+What is the best way to tow a damaged vehicle?,Fortuner Hilux,Gen 1,c0c9228c19d69774b362,14c2e316e24d66008492,train
+What is the best way to tow a damaged vehicle?,Fortuner Hilux,Gen 1,d35de3825fbc728ac5b2,5c5cb13dde0a61583843,train
+What is the best way to tow a damaged vehicle?,Fortuner Hilux,Gen 1,c0c9228c19d69774b362,f8d4ef4a0ad250a50b2c,train
+How do I release the parking lock on a damaged vehicle?,Fortuner Hilux,Gen 1,d35de3825fbc728ac5b2,fc79e4f2be173e0552c1,validation
+How do I release the parking lock on a damaged vehicle?,Fortuner Hilux,Gen 1,d35de3825fbc728ac5b2,0ad7b0c48722fae84b2e,validation
+How do I release the parking lock on a damaged vehicle?,Fortuner Hilux,Gen 1,d35de3825fbc728ac5b2,0e1042787da33cd78378,validation
+Can airbags still deploy after a crash?,Fortuner Hilux,Gen 1,32b10d67b6526340c13b,9fc5a62162e7f4901461,test
+Can airbags still deploy after a crash?,Fortuner Hilux,Gen 1,7a8ee2f7c1871e0b3006,175c68650d461bf23319,test
+Can airbags still deploy after a crash?,Fortuner Hilux,Gen 1,32b10d67b6526340c13b,35ff02b8c463b79bde94,test
+Can airbags still deploy after a crash?,Fortuner Hilux,Gen 1,7a8ee2f7c1871e0b3006,aa581114d22a69130986,test
+Can airbags still deploy after a crash?,Fortuner Hilux,Gen 1,32b10d67b6526340c13b,6119f638d407d8016449,test
+Can airbags still deploy after a crash?,Fortuner Hilux,Gen 1,7a8ee2f7c1871e0b3006,042098d414ab197c8213,test
+Can the seat belt pretensioner still be live after an accident?,Fortuner Hilux,Gen 1,12f56ecf794be0a5ffd9,175c68650d461bf23319,train
+Can the seat belt pretensioner still be live after an accident?,Fortuner Hilux,Gen 1,12f56ecf794be0a5ffd9,9fc5a62162e7f4901461,train
+Can the seat belt pretensioner still be live after an accident?,Fortuner Hilux,Gen 1,12f56ecf794be0a5ffd9,0fd7d0ae9ef98b84deb8,train
+How should the vehicle be stabilised with blocks before cutting?,Fortuner Hilux,Gen 1,6d7e9bec6082341d6dc2,3689f059d4faaea2dc4b,test
+How should the vehicle be stabilised with blocks before cutting?,Fortuner Hilux,Gen 1,6d7e9bec6082341d6dc2,ba9d5822d9f782a28a48,test
+How should the vehicle be stabilised with blocks before cutting?,Fortuner Hilux,Gen 1,6d7e9bec6082341d6dc2,e33c4791525753d1636f,test
+How do I store a damaged vehicle that has a high voltage battery?,Fortuner Hilux,Gen 1,02d035302c8b40d0ac96,eb49d6bf121b8e46c913,train
+How do I store a damaged vehicle that has a high voltage battery?,Fortuner Hilux,Gen 1,5494bdf7a9fb6b9d1e92,61485b61e1483de2af0d,train
+How do I store a damaged vehicle that has a high voltage battery?,Fortuner Hilux,Gen 1,02d035302c8b40d0ac96,f8d4ef4a0ad250a50b2c,train
+How do I store a damaged vehicle that has a high voltage battery?,Fortuner Hilux,Gen 1,5494bdf7a9fb6b9d1e92,e783fde7d69e96cd6cd3,train
+How do I store a damaged vehicle that has a high voltage battery?,Fortuner Hilux,Gen 1,02d035302c8b40d0ac96,0cd7c790ef52051fef74,train
+How do I store a damaged vehicle that has a high voltage battery?,Fortuner Hilux,Gen 1,5494bdf7a9fb6b9d1e92,ba9d5822d9f782a28a48,train
+"Coolant from the traction battery has spilled, is it dangerous?",Fortuner Hilux,Gen 1,257d7d101e05e6582758,bb0bdfea0bd30e9ef8dd,train
+"Coolant from the traction battery has spilled, is it dangerous?",Fortuner Hilux,Gen 1,257d7d101e05e6582758,29fdcf3dc5f0396dc2a7,train
+"Coolant from the traction battery has spilled, is it dangerous?",Fortuner Hilux,Gen 1,257d7d101e05e6582758,f8d4ef4a0ad250a50b2c,train
+Is there an explosion risk from the sub-battery?,Fortuner Hilux,Gen 1,161aed20680762c59ff5,00322c09a5c47286ebf8,train
+Is there an explosion risk from the sub-battery?,Fortuner Hilux,Gen 1,23e81922532cc43b0eae,63cf63f9715b66a9c8e0,train
+Is there an explosion risk from the sub-battery?,Fortuner Hilux,Gen 1,161aed20680762c59ff5,c6c913fb20aa2f5d82c2,train
+Is there an explosion risk from the sub-battery?,Fortuner Hilux,Gen 1,23e81922532cc43b0eae,449db58df6d149ba2ef4,train
+Is there an explosion risk from the sub-battery?,Fortuner Hilux,Gen 1,161aed20680762c59ff5,f8d4ef4a0ad250a50b2c,train
+Is there an explosion risk from the sub-battery?,Fortuner Hilux,Gen 1,23e81922532cc43b0eae,0cd7c790ef52051fef74,train
+What is a service plug?,Fortuner Hilux,Gen 1,7fda3d91f63ef9cceafb,02d035302c8b40d0ac96,test
+What is a service plug?,Fortuner Hilux,Gen 1,7fda3d91f63ef9cceafb,a767108b395347c632a1,test
+What is a service plug?,Fortuner Hilux,Gen 1,7fda3d91f63ef9cceafb,61485b61e1483de2af0d,test
+How do I adjust the valve clearance?,Fortuner 4Runner,Gen 2,c96d17ac94e5a5960e81,77278846b96687c928e9,train
+How do I adjust the valve clearance?,Fortuner 4Runner,Gen 2,705dc46978e2143de0cf,54f588e4bcba1cfca534,train
+How do I adjust the valve clearance?,Fortuner 4Runner,Gen 2,c96d17ac94e5a5960e81,f3851e079396144bd832,train
+How do I adjust the valve clearance?,Fortuner 4Runner,Gen 2,705dc46978e2143de0cf,bd2deabec1d8d9826164,train
+How do I adjust the valve clearance?,Fortuner 4Runner,Gen 2,c96d17ac94e5a5960e81,d3d317434f664ee07738,train
+How do I adjust the valve clearance?,Fortuner 4Runner,Gen 2,705dc46978e2143de0cf,a4b48a81e413916684a6,train
+How do I do a compression test on the engine?,Fortuner 4Runner,Gen 2,7ffdc49caf7fa63bc319,bd2deabec1d8d9826164,test
+How do I do a compression test on the engine?,Fortuner 4Runner,Gen 2,7ffdc49caf7fa63bc319,5121c069468aa1344fb7,test
+How do I do a compression test on the engine?,Fortuner 4Runner,Gen 2,7ffdc49caf7fa63bc319,c75dc3c1722590a62de8,test
+How do I measure camshaft runout?,Fortuner 4Runner,Gen 2,4e37c6fdf1ac278a1c26,6cf5313a7f55e3e5f31b,train
+How do I measure camshaft runout?,Fortuner 4Runner,Gen 2,4e37c6fdf1ac278a1c26,9df589126c6a54b8b57a,train
+How do I measure camshaft runout?,Fortuner 4Runner,Gen 2,4e37c6fdf1ac278a1c26,b2d82590d1b9a9b2c54d,train
+How do I loosen the cylinder head bolts?,Fortuner 4Runner,Gen 2,d80268db52c5ac7f0719,7fccbf74b1c21a2f7867,test
+How do I loosen the cylinder head bolts?,Fortuner 4Runner,Gen 2,d80268db52c5ac7f0719,8c92625689a0743ed267,test
+How do I loosen the cylinder head bolts?,Fortuner 4Runner,Gen 2,d80268db52c5ac7f0719,6e1868f1774b12c38b8f,test
+What is the maximum warpage of the cylinder block surface?,Fortuner 4Runner,Gen 2,ed52eaa5133566b5f8e9,c317192376bd3fe84814,train
+What is the maximum warpage of the cylinder block surface?,Fortuner 4Runner,Gen 2,ed52eaa5133566b5f8e9,1117edfb8377e8852839,train
+What is the maximum warpage of the cylinder block surface?,Fortuner 4Runner,Gen 2,ed52eaa5133566b5f8e9,8c92625689a0743ed267,train
+What is the standard piston oil clearance?,Fortuner 4Runner,Gen 2,d6e87d018dfed78fbbf3,d51cf0e11eda553844ab,test
+What is the standard piston oil clearance?,Fortuner 4Runner,Gen 2,d6e87d018dfed78fbbf3,242a97decf37a9ef6f9d,test
+What is the standard piston oil clearance?,Fortuner 4Runner,Gen 2,d6e87d018dfed78fbbf3,296401648b7c00a4be44,test
+What is the maximum oil clearance for the camshaft bearing caps?,Fortuner 4Runner,Gen 2,8c92625689a0743ed267,474cb9d9be5c64a1ac7c,train
+What is the maximum oil clearance for the camshaft bearing caps?,Fortuner 4Runner,Gen 2,8c92625689a0743ed267,18e566285ea1b89cb5b6,train
+What is the maximum oil clearance for the camshaft bearing caps?,Fortuner 4Runner,Gen 2,8c92625689a0743ed267,5d53909cf12763c958d3,train
+What torque for the exhaust manifold nuts?,Fortuner 4Runner,Gen 2,1153de891611d5cc5b27,d1c85babdfbf2c419acf,test
+What torque for the exhaust manifold nuts?,Fortuner 4Runner,Gen 2,1153de891611d5cc5b27,e1881d7fd14f9c8f7e6b,test
+What torque for the exhaust manifold nuts?,Fortuner 4Runner,Gen 2,1153de891611d5cc5b27,e30239bda456feb776b6,test
+Torque for the engine under cover bolts,Fortuner 4Runner,Gen 2,e1da0978d9189a024068,0e9b11a5a7d375d2d3f2,train
+Torque for the engine under cover bolts,Fortuner 4Runner,Gen 2,e1da0978d9189a024068,c6a85fbcda1e9db492cd,train
+Torque for the engine under cover bolts,Fortuner 4Runner,Gen 2,e1da0978d9189a024068,f8926127abf668a94024,train
+How do I check the ignition timing with a timing light?,Fortuner 4Runner,Gen 2,592a75b649b47d6f0b23,2dc6e517dd8590452939,test
+How do I check the ignition timing with a timing light?,Fortuner 4Runner,Gen 2,592a75b649b47d6f0b23,66482645e998b750f3ba,test
+How do I check the ignition timing with a timing light?,Fortuner 4Runner,Gen 2,592a75b649b47d6f0b23,d3d317434f664ee07738,test
+How do I retighten the connecting rod cap bolts?,Fortuner 4Runner,Gen 2,f7cea32de7963ee31128,788baaf9b829013648e5,train
+How do I retighten the connecting rod cap bolts?,Fortuner 4Runner,Gen 2,f7cea32de7963ee31128,f201db07567cd7a3c892,train
+How do I retighten the connecting rod cap bolts?,Fortuner 4Runner,Gen 2,f7cea32de7963ee31128,b05129b92e66bb401b6f,train
+How do I remove the camshaft timing gear and the timing chain?,Fortuner 4Runner,Gen 2,44bfbf13583e999c6138,b019ce1d718b716a6193,train
+How do I remove the camshaft timing gear and the timing chain?,Fortuner 4Runner,Gen 2,44bfbf13583e999c6138,7fccbf74b1c21a2f7867,train
+How do I remove the camshaft timing gear and the timing chain?,Fortuner 4Runner,Gen 2,44bfbf13583e999c6138,2b15066e78bce285ca97,train
+What adhesive is used on the oil pressure switch?,Fortuner 4Runner,Gen 2,06d7cf278f89955d19f8,57f1de336155ce025d30,test
+What adhesive is used on the oil pressure switch?,Fortuner 4Runner,Gen 2,06d7cf278f89955d19f8,918ab0b5c7098c7b6c62,test
+What adhesive is used on the oil pressure switch?,Fortuner 4Runner,Gen 2,06d7cf278f89955d19f8,bce2bb23e3721dc59869,test
+My engine is overheating. Why does it happen,Fortuner 48v,Gen 2,952162bbdfb721fda9db,c73913d8ac9c7026c36f,train
+My engine is overheating. Why does it happen,Fortuner 48v,Gen 2,45e4b56cc5eaf80f1e47,80b9f51c2a750dba6dc7,train
+My engine is overheating. Why does it happen,Fortuner 48v,Gen 2,952162bbdfb721fda9db,44d44f352ad40c36b006,train
+My engine is overheating. Why does it happen,Fortuner 48v,Gen 2,45e4b56cc5eaf80f1e47,8341191ebb257e53bb47,train
+My engine is overheating. Why does it happen,Fortuner 48v,Gen 2,952162bbdfb721fda9db,6fb3f865d3aef84b0c63,train
+My engine is overheating. Why does it happen,Fortuner 48v,Gen 2,45e4b56cc5eaf80f1e47,46440e1c80a0bb231dfa,train
+The 12-volt battery is dead. How can I start it then,Fortuner 48v,Gen 2,e587af57df241841fc10,8af470df467b73e053ad,train
+The 12-volt battery is dead. How can I start it then,Fortuner 48v,Gen 2,0d091d5dca40943a951e,b821bfb79f43efb496f8,train
+The 12-volt battery is dead. How can I start it then,Fortuner 48v,Gen 2,e587af57df241841fc10,a675ba7cc62a7df1ab8e,train
+The 12-volt battery is dead. How can I start it then,Fortuner 48v,Gen 2,0d091d5dca40943a951e,1ca043249a5b7f1bde12,train
+The 12-volt battery is dead. How can I start it then,Fortuner 48v,Gen 2,e587af57df241841fc10,6f1e1d09a130f1835213,train
+The 12-volt battery is dead. How can I start it then,Fortuner 48v,Gen 2,0d091d5dca40943a951e,57393485fbabfa39bb5c,train
+I am changing a flat tyre. What should I tighten the nuts to,Fortuner 48v,Gen 2,282ae0b913f1217f4d59,740d8129f44f55c569aa,validation
+I am changing a flat tyre. What should I tighten the nuts to,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,a411f9f6bab7e64e28d1,validation
+I am changing a flat tyre. What should I tighten the nuts to,Fortuner 48v,Gen 2,282ae0b913f1217f4d59,6cafb7e9ea062b9db5ac,validation
+I am changing a flat tyre. What should I tighten the nuts to,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,add731ef508dd95bcd68,validation
+I am changing a flat tyre. What should I tighten the nuts to,Fortuner 48v,Gen 2,282ae0b913f1217f4d59,49066adc6cc40214a11d,validation
+I am changing a flat tyre. What should I tighten the nuts to,Fortuner 48v,Gen 2,a010046500b9ad6ab2b9,1e555b55e722e85acf56,validation
+The AdBlue warning light is on. Can I fill it myself,Fortuner 48v,Gen 2,bb999d8774f47cbe0ca2,99f130a63b58328d78d4,train
+The AdBlue warning light is on. Can I fill it myself,Fortuner 48v,Gen 2,43b344277af8308d3b72,0c99ede04383c17d4df2,train
+The AdBlue warning light is on. Can I fill it myself,Fortuner 48v,Gen 2,bb999d8774f47cbe0ca2,004ac396a8b8ab5fcf85,train
+The AdBlue warning light is on. Can I fill it myself,Fortuner 48v,Gen 2,43b344277af8308d3b72,d3b17783da8bbd5178a1,train
+The AdBlue warning light is on. Can I fill it myself,Fortuner 48v,Gen 2,bb999d8774f47cbe0ca2,4615199e1765fe6e1c2d,train
+The AdBlue warning light is on. Can I fill it myself,Fortuner 48v,Gen 2,43b344277af8308d3b72,ea8c27dba51beb0d4442,train
+My vehicle is stuck in mud. What should I do first,Fortuner 48v,Gen 2,25a3bc6e125bdd1ecc02,49066adc6cc40214a11d,validation
+My vehicle is stuck in mud. What should I do first,Fortuner 48v,Gen 2,25a3bc6e125bdd1ecc02,64286390c25e5f727b4a,validation
+My vehicle is stuck in mud. What should I do first,Fortuner 48v,Gen 2,25a3bc6e125bdd1ecc02,51fba1b3446ebcee8e56,validation
+I need to tow the vehicle. Is it okay to use chains for that,Fortuner 48v,Gen 2,ab3c93d3030121d8640f,3bf909f08ef308bd666c,train
+I need to tow the vehicle. Is it okay to use chains for that,Fortuner 48v,Gen 2,ab3c93d3030121d8640f,031c082ecce503653569,train
+I need to tow the vehicle. Is it okay to use chains for that,Fortuner 48v,Gen 2,ab3c93d3030121d8640f,37faead1514763ced71a,train
+The engine stalled because it ran out of diesel. How do I restart it,Fortuner 48v,Gen 2,e0c419b3d726dd823083,fc5f633fd7b933525f0d,test
+The engine stalled because it ran out of diesel. How do I restart it,Fortuner 48v,Gen 2,e0c419b3d726dd823083,a00fcff29d54f136f3e1,test
+The engine stalled because it ran out of diesel. How do I restart it,Fortuner 48v,Gen 2,e0c419b3d726dd823083,ecb2953b5bbacbe4ce8d,test
+I need to replace the battery in the electronic key. Which battery does it take,Fortuner 48v,Gen 2,d0c8f95bc42e15e0d7e8,3e32fe50cafc87c5c8bc,train
+I need to replace the battery in the electronic key. Which battery does it take,Fortuner 48v,Gen 2,2fb1fc4d83d55b847451,5dff8e146ec60d73a73e,train
+I need to replace the battery in the electronic key. Which battery does it take,Fortuner 48v,Gen 2,d0c8f95bc42e15e0d7e8,88c01b6c1c902ce357e0,train
+I need to replace the battery in the electronic key. Which battery does it take,Fortuner 48v,Gen 2,2fb1fc4d83d55b847451,9588f17ecfd1dbf7b662,train
+I need to replace the battery in the electronic key. Which battery does it take,Fortuner 48v,Gen 2,d0c8f95bc42e15e0d7e8,080576f781d0be6051b8,train
+I need to replace the battery in the electronic key. Which battery does it take,Fortuner 48v,Gen 2,2fb1fc4d83d55b847451,52c72f680b75263c7626,train
+How do I disable the vehicle for rescue. And what if the ignition switch is not working,Fortuner Hilux,Gen 1,a4006801195d3b19407d,b5eb72f96d1aec14437d,train
+How do I disable the vehicle for rescue. And what if the ignition switch is not working,Fortuner Hilux,Gen 1,a4006801195d3b19407d,6a687e49b57ff72231b2,train
+How do I disable the vehicle for rescue. And what if the ignition switch is not working,Fortuner Hilux,Gen 1,a4006801195d3b19407d,427e2c02a91e842d58de,train
+I want to adjust the valve clearance. How do I do it,Fortuner 4Runner,Gen 2,c96d17ac94e5a5960e81,77278846b96687c928e9,validation
+I want to adjust the valve clearance. How do I do it,Fortuner 4Runner,Gen 2,705dc46978e2143de0cf,54f588e4bcba1cfca534,validation
+I want to adjust the valve clearance. How do I do it,Fortuner 4Runner,Gen 2,c96d17ac94e5a5960e81,f3851e079396144bd832,validation
+I want to adjust the valve clearance. How do I do it,Fortuner 4Runner,Gen 2,705dc46978e2143de0cf,bd2deabec1d8d9826164,validation
+I want to adjust the valve clearance. How do I do it,Fortuner 4Runner,Gen 2,c96d17ac94e5a5960e81,d3d317434f664ee07738,validation
+I want to adjust the valve clearance. How do I do it,Fortuner 4Runner,Gen 2,705dc46978e2143de0cf,a4b48a81e413916684a6,validation

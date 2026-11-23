@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}{{ order.code }}{% endblock %}
+{% block subtitle %}{{ order.model }}, {{ order.generation }}{% if order.vehicle %} · {{ order.vehicle.asset_id }}{%
+endif %}{% endblock %}
+{% block actions %}<span class="pill pill-blue fs-6">{{ order.status }}</span>
+<span
+  class="pill {{ 'pill-bad' if order.risk == 'High' else 'pill-warn' if order.risk == 'Medium' else '' }} fs-6">Risk: {{
+  order.risk }}</span>{% endblock %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-xl-8">
+    <div class="card-soft">
+      <h2>Reported issue</h2>
+      <p class="mb-2" style="white-space:pre-wrap">{{ order.issue }}</p>
+      <div class="hint">Raised by {{ order.technician.full_name }} on {{ order.created_at|dt }} · Priority {{
+        order.priority }}</div>
+    </div>
+
+    {% if order.chat %}
+    <div class="card-soft">
+      <h2><i class="bi bi-stars text-primary me-1"></i>AI troubleshooting recommendation</h2>
+      <div class="ai-box">{{ order.chat.answer }}</div>
+      {% if order.chat.sources %}<div class="mt-2"><span class="hint me-2">Evidence:</span>{% for s in
+        order.chat.sources %}<span class="ev-chip"><i class="bi bi-file-earmark-pdf"></i>{{ s.document }}, page {{
+          s.page }}</span>{% endfor %}</div>{% endif %}
+      <div class="hint mt-2">Generated from the manuals for this vehicle. An engineer must verify it before work starts.
+      </div>
+    </div>
+    {% endif %}
+
+    {# ---- Technician submission (what the technician entered) ---- #}
+    {% if is_eng or not editable %}
+    <div class="card-soft">
+      <h2>Technician's work order entry</h2>
+      <dl class="row mb-0">
+        <dt class="col-sm-3">Case status</dt><dd class="col-sm-9"><span class="pill pill-blue">{{ order.status }}</span></dd>
+        <dt class="col-sm-3">Findings</dt><dd class="col-sm-9" style="white-space:pre-wrap">{{ order.findings or '-' }}</dd>
+        <dt class="col-sm-3">Actions taken</dt><dd class="col-sm-9" style="white-space:pre-wrap">{{ order.actions_taken or '-' }}</dd>
+        <dt class="col-sm-3">Parts used</dt><dd class="col-sm-9">{{ order.parts or '-' }}</dd>
+        <dt class="col-sm-3">Hours spent</dt><dd class="col-sm-9">{{ '%g'|format(order.hours or 0) }}</dd>
+      </dl>
+    </div>
+    {% endif %}
+
+    {% if not is_eng and editable %}
+    <div class="card-soft">
+      <h2>Update your findings</h2>
+      <p class="hint">Technicians can update progress but cannot approve or close a work order.</p>
+      {% if order.status == 'Returned for evidence' %}<div class="alert alert-warning py-2">The engineer returned this case for more evidence. Add it below and set the status to <b>{{ READY }}</b>.</div>{% endif %}
+      {% if order.risk == 'High' and order.approval != 'Approved' %}<div class="alert alert-warning py-2">High-risk case: work cannot start until an engineer approves it.</div>{% endif %}
+      <form method="post" action="{{ url_for('order_update', code=order.code) }}" data-loading="Saving…">{{ csrf_input }}
+        <div class="row g-3">
+          {% set field_statuses = statuses %}{% set o = order %}{% set status_locked = status_locked %}{% include "_tech_fields.html" %}
+        </div>
+        <button class="btn btn-primary mt-3" type="submit">Save update</button>
+      </form>
+    </div>
+    {% endif %}
+
+    {# ---- Engineer review ---- #}
+    {% if is_eng %}
+    <div class="card-soft">
+      <h2>Engineer review</h2>
+      {% if editable %}
+      <form method="post" action="{{ url_for('order_review', code=order.code) }}" data-loading="Saving…">{{ csrf_input }}
+        <div class="row g-3">
+          <div class="col-md-5"><label class="form-label">Risk classification</label>
+            <select class="form-select" name="risk" required>
+              <option value="" {{ 'selected' if order.risk not in risks }}>Select risk…</option>
+              {% for r in risks %}<option {{ 'selected' if r == order.risk }}>{{ r }}</option>{% endfor %}</select></div>
+          <div class="col-12"><label class="form-label">Review findings / Evidence gap</label>
+            <textarea class="form-control" name="review_gap" rows="3" maxlength="2200" placeholder="Is anything missing or unclear in the technician's evidence?">{{ order.review_gap or '' }}</textarea></div>
+        </div>
+        <div class="hint mt-2">Low or Medium moves the case to Diagnosis and Closure. High sends it to High-Risk Approval.</div>
+        <button class="btn btn-primary mt-3" type="submit"><i class="bi bi-check2 me-1"></i>Save review</button>
+      </form>
+      {% else %}
+      <dl class="row mb-0">
+        <dt class="col-sm-3">Risk</dt><dd class="col-sm-9">{{ order.risk }}</dd>
+        <dt class="col-sm-3">Evidence gap</dt><dd class="col-sm-9">{{ order.review_gap or '-' }}</dd>
+      </dl>
+      {% endif %}
+      <div class="mt-3 d-flex gap-2 flex-wrap">
+        {% if order.risk == 'High' %}<a class="btn btn-sm btn-outline-danger" href="{{ url_for('approvals') }}"><i class="bi bi-shield-check me-1"></i>High-Risk Approval</a>{% endif %}
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('closure') }}"><i class="bi bi-clipboard-check me-1"></i>Diagnosis and Closure</a>
+      </div>
+    </div>
+    {% elif order.risk in risks %}
+    <div class="card-soft">
+      <h2>Engineer review</h2>
+      <dl class="row mb-0">
+        <dt class="col-sm-3">Risk</dt><dd class="col-sm-9">{{ order.risk }}</dd>
+        <dt class="col-sm-3">Evidence gap</dt><dd class="col-sm-9" style="white-space:pre-wrap">{{ order.review_gap or '-' }}</dd>
+      </dl>
+    </div>
+    {% endif %}
+
+    {% if order.diagnosis or order.verification or order.outcome %}
+    <div class="card-soft">
+      <h2>Diagnosis and closure</h2>
+      <dl class="row mb-0">
+        <dt class="col-sm-3">Final diagnosis</dt><dd class="col-sm-9" style="white-space:pre-wrap">{{ order.diagnosis or '-' }}</dd>
+        <dt class="col-sm-3">Verification</dt><dd class="col-sm-9" style="white-space:pre-wrap">{{ order.verification or '-' }}</dd>
+        <dt class="col-sm-3">Outcome</dt><dd class="col-sm-9" style="white-space:pre-wrap">{{ order.outcome or '-' }}</dd>
+      </dl>
+      {% if not editable %}<div class="hint mt-2">This case is closed and read-only.</div>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="col-xl-4">
+    {% if order.risk == 'High' %}
+    <div class="card-soft" id="approval">
+      <h2><i class="bi bi-shield-check me-1"></i>High-risk approval</h2>
+      <p class="mb-2">Status: <span
+          class="pill {{ 'pill-ok' if order.approval == 'Approved' else 'pill-warn' if order.approval == 'Pending' else 'pill-bad' }}">{{
+          order.approval }}</span></p>
+      {% if order.scope %}<p class="hint">Approved scope: {{ order.scope }}</p>{% endif %}
+      {% if is_eng and order.approval == 'Pending' %}<a class="btn btn-sm btn-danger mb-2" href="{{ url_for('approvals') }}">Decide in High-Risk Approval</a>{% endif %}
+      {% if order.approvals %}
+      <hr>
+      <div class="hint mb-1">Decision history</div>
+      {% for a in order.approvals|reverse %}<div class="mb-2"><span
+          class="pill {{ 'pill-ok' if a.decision == 'Approved' else 'pill-warn' if a.decision == 'Returned for evidence' else 'pill-bad' }}">{{ a.decision }}</span>
+        <div class="hint">{{ a.engineer.full_name }}, {{ a.decided_at|dt }}</div>{% if a.comment %}<div class="hint">{{ a.comment }}</div>{% endif %}
+      </div>{% endfor %}{% endif %}
+    </div>
+    {% endif %}
+
+    <div class="card-soft">
+      <h2>Activity</h2>
+      <ul class="timeline">{% for e in order.log|reverse %}<li>{{ e.text }}<small>{{ e.user.full_name if e.user else
+            'System' }} · {{ e.at|dt }}</small></li>{% endfor %}</ul>
+    </div>
+
+    {% if related %}<div class="card-soft">
+      <h2>Related repair history</h2>
+      {% for r in related %}<div class="mb-2">
+        <div>{{ r.summary[:160] }}</div>
+        <div class="hint">{{ r.recorded_at|dt }}{% if r.is_synthetic %} · synthetic{% endif %}</div>
+      </div>{% endfor %}
+      <a href="{{ url_for('history', pair=order.model ~ '||' ~ order.generation) }}">See all history</a>
+    </div>{% endif %}
+  </div>
+</div>
+{% endblock %}

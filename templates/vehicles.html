@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Vehicles{% endblock %}
+{% block subtitle %}The vehicles registered with the workshop. Register a new vehicle if it is not in the list.{%
+endblock %}
+{% block actions %}<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vehicleModal"
+  onclick="fillVehicle()"><i class="bi bi-plus-lg me-1"></i>Register vehicle</button>{% endblock %}
+{% block content %}
+<div class="card-soft">
+  <form class="row g-2 mb-3" method="get">
+    <div class="col-sm-6 col-md-4"><input class="form-control" name="q" value="{{ q }}"
+        placeholder="Search asset, model or generation"></div>
+    <div class="col-auto"><button class="btn btn-outline-primary"><i class="bi bi-search me-1"></i>Search</button></div>
+  </form>
+  {% if rows %}<div class="table-wrap">
+    <table class="table table-modern">
+      <thead>
+        <tr>
+          <th>Asset ID</th>
+          <th>Model</th>
+          <th>Generation</th>
+          <th>Engine / variant</th>
+          <th>Location</th>
+          <th>Criticality</th>
+          <th>Status</th>{% if me.role == ADMIN %}<th class="text-end">Actions</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>{% for v in rows %}<tr>
+          <td class="fw-semibold">{{ v.asset_id }}</td>
+          <td>{{ v.model }}</td>
+          <td>{{ v.generation }}{% if v.year %}<div class="hint">{{ v.year }}</div>{% endif %}</td>
+          <td>{{ v.engine or '-' }}{% if v.variant %}<div class="hint">{{ v.variant }}</div>{% endif %}</td>
+          <td>{{ v.location or '-' }}</td>
+          <td>{{ v.criticality }}</td>
+          <td><span class="pill {{ 'pill-ok' if v.status == 'Available' else '' }}">{{ v.status }}</span></td>
+          {% if me.role == ADMIN %}<td class="text-end text-nowrap">
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#vehicleModal"
+              onclick='fillVehicle({{ {"id": v.id, "asset_id": v.asset_id, "model": v.model, "generation": v.generation, "year": v.year or "", "engine": v.engine or "", "variant": v.variant or "", "location": v.location or "", "criticality": v.criticality, "status": v.status}|tojson }})'><i
+                class="bi bi-pencil"></i></button>
+            <form class="d-inline" method="post" action="{{ url_for('vehicle_delete', vid=v.id) }}"
+              onsubmit="return confirm('Delete {{ v.asset_id }}?');">{{ csrf_input }}
+              <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </form>
+          </td>{% endif %}
+        </tr>{% endfor %}</tbody>
+    </table>
+  </div>
+  {% else %}<div class="empty"><i class="bi bi-truck-front"></i>No vehicles registered yet. Use <b>Register vehicle</b>
+    to add the first one.</div>{% endif %}
+</div>
+
+<div class="modal fade" id="vehicleModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <form class="modal-content" method="post" action="{{ url_for('vehicle_save') }}" data-loading="Saving…">
+      {{ csrf_input }}<input type="hidden" name="id" id="v_id">
+      <div class="modal-header">
+        <h5 class="modal-title" id="vehicleTitle">Register vehicle</h5><button type="button" class="btn-close"
+          data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-4"><label class="form-label">Asset ID *</label><input class="form-control" name="asset_id"
+              id="v_asset_id" maxlength="30" placeholder="e.g. FORT-014" required></div>
+          <div class="col-md-4"><label class="form-label">Car model *</label><input class="form-control" name="model"
+              id="v_model" maxlength="80" placeholder="e.g. Fortuner 48v" required></div>
+          <div class="col-md-4"><label class="form-label">Generation *</label><input class="form-control"
+              name="generation" id="v_generation" maxlength="40" placeholder="e.g. Gen 2" required></div>
+          <div class="col-md-4"><label class="form-label">Years</label><input class="form-control" name="year"
+              id="v_year" maxlength="40" placeholder="e.g. 2025-2027"></div>
+          <div class="col-md-4"><label class="form-label">Engine</label><input class="form-control" name="engine"
+              id="v_engine" maxlength="80"></div>
+          <div class="col-md-4"><label class="form-label">Variant</label><input class="form-control" name="variant"
+              id="v_variant" maxlength="80"></div>
+          <div class="col-md-4"><label class="form-label">Location</label><input class="form-control" name="location"
+              id="v_location" maxlength="80"></div>
+          <div class="col-md-4"><label class="form-label">Criticality</label><select class="form-select"
+              name="criticality" id="v_criticality">{% for r in risks %}<option>{{ r }}</option>{% endfor %}</select>
+          </div>
+          <div class="col-md-4"><label class="form-label">Status</label><select class="form-select" name="status"
+              id="v_status">{% for s in statuses %}<option>{{ s }}</option>{% endfor %}</select></div>
+        </div>
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-light"
+          data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="submit">Save vehicle</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  function fillVehicle(v) {
+    v = v || {criticality: 'Unassessed', status: 'Available'};
+    document.getElementById('vehicleTitle').textContent = v.id ? 'Edit vehicle' : 'Register vehicle';
+    ['id', 'asset_id', 'model', 'generation', 'year', 'engine', 'variant', 'location', 'criticality', 'status'].forEach(function (k) {
+      document.getElementById('v_' + k).value = v[k] === undefined ? '' : v[k];
+    });
+  }
+</script>{% endblock %}

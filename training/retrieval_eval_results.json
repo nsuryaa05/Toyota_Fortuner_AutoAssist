@@ -1,0 +1,653 @@
+{
+  "retrieval_mode": "KEYWORD-ONLY (BM25 + RRF; FAISS not tested)",
+  "split": "all",
+  "questions": 83,
+  "components_run": {
+    "faiss": false,
+    "pretrained_crossencoder": false,
+    "fine_tuned_crossencoder": false
+  },
+  "configs": {
+    "1 Baseline (old retrieval)": {
+      "answerable": 73,
+      "unanswerable": 10,
+      "Recall@5": 0.711,
+      "Precision@5": 0.216,
+      "MRR": 0.616,
+      "Hit@1": 0.466,
+      "Hit@5 (retrieval accuracy)": 0.822,
+      "Citation correctness (top-3 pages)": 0.301,
+      "False no-match rate": 0.027,
+      "Wrong-model retrieval rate": 0.0,
+      "False-evidence rate (not-in-docs questions)": 0.7,
+      "Unanswerable handled correctly": 0.3,
+      "missed": [
+        "Q003",
+        "Q018",
+        "Q025",
+        "Q032",
+        "Q041",
+        "Q062",
+        "Q064",
+        "Q065",
+        "Q067",
+        "Q068",
+        "Q069",
+        "Q070",
+        "Q073"
+      ],
+      "failure_details": [
+        {
+          "id": "Q003",
+          "type": "fact",
+          "question": "How much coolant does the engine hold?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              431
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              375
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              323
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              420
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              322
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              376
+            ]
+          ]
+        },
+        {
+          "id": "Q018",
+          "type": "symptom",
+          "question": "I ran out of diesel and the engine stalled, how to restart?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              421
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              435
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              80
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              422
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              81
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              79
+            ]
+          ]
+        },
+        {
+          "id": "Q025",
+          "type": "howto",
+          "question": "How do I release the handbrake?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              196
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              32
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              155
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              392
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              198
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              156
+            ]
+          ]
+        },
+        {
+          "id": "Q032",
+          "type": "howto",
+          "question": "How do I inspect the 12 volt battery?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              323
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              324
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              305
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              307
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              326
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              306
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              241
+            ]
+          ]
+        },
+        {
+          "id": "Q041",
+          "type": "howto",
+          "question": "How should a burning vehicle be put out?",
+          "expected": [
+            [
+              "Fortuner_Hilux_2026.pdf",
+              138
+            ]
+          ],
+          "got": [
+            [
+              "Fortuner_Hilux_2026.pdf",
+              76
+            ],
+            [
+              "Fortuner_Hilux_2026.pdf",
+              140
+            ],
+            [
+              "Fortuner_Hilux_2026.pdf",
+              139
+            ],
+            [
+              "Fortuner_Hilux_2026.pdf",
+              78
+            ],
+            [
+              "Fortuner_Hilux_2026.pdf",
+              134
+            ]
+          ]
+        },
+        {
+          "id": "Q062",
+          "type": "howto",
+          "question": "How do I remove the camshaft timing gear and the timing chain?",
+          "expected": [
+            [
+              "Toyota-4Runner_2006.pdf",
+              73
+            ]
+          ],
+          "got": [
+            [
+              "Toyota-4Runner_2006.pdf",
+              47
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              144
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              46
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              44
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              54
+            ]
+          ]
+        },
+        {
+          "id": "Q064",
+          "type": "follow_up",
+          "question": "Why does it happen?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              418
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              419
+            ]
+          ],
+          "got": []
+        },
+        {
+          "id": "Q065",
+          "type": "follow_up",
+          "question": "How can I start it then?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              413
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              414
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              235
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              241
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              238
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              382
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              145
+            ]
+          ]
+        },
+        {
+          "id": "Q067",
+          "type": "follow_up",
+          "question": "Can I fill it myself?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              333
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              336
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              332
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              394
+            ]
+          ]
+        },
+        {
+          "id": "Q068",
+          "type": "follow_up",
+          "question": "What should I do first?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              422
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              170
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              307
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              305
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              193
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              306
+            ]
+          ]
+        },
+        {
+          "id": "Q069",
+          "type": "follow_up",
+          "question": "Is it okay to use chains for that?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              381
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              263
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              380
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              264
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              383
+            ]
+          ]
+        },
+        {
+          "id": "Q070",
+          "type": "follow_up",
+          "question": "How do I restart it?",
+          "expected": [
+            [
+              "fortuner-48v-2025.pdf",
+              421
+            ]
+          ],
+          "got": [
+            [
+              "fortuner-48v-2025.pdf",
+              83
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              186
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              415
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              422
+            ],
+            [
+              "fortuner-48v-2025.pdf",
+              332
+            ]
+          ]
+        },
+        {
+          "id": "Q073",
+          "type": "follow_up",
+          "question": "How do I do it?",
+          "expected": [
+            [
+              "Toyota-4Runner_2006.pdf",
+              9
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              10
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              11
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              12
+            ]
+          ],
+          "got": []
+        }
+      ]
+    },
+    "2 BM25+RRF (no FAISS)": {
+      "answerable": 73,
+      "unanswerable": 10,
+      "Recall@5": 0.867,
+      "Precision@5": 0.26,
+      "MRR": 0.793,
+      "Hit@1": 0.644,
+      "Hit@5 (retrieval accuracy)": 0.986,
+      "Citation correctness (top-3 pages)": 0.388,
+      "False no-match rate": 0.0,
+      "Wrong-model retrieval rate": 0.0,
+      "False-evidence rate (not-in-docs questions)": 0.1,
+      "Unanswerable handled correctly": 0.9,
+      "missed": [
+        "Q062"
+      ],
+      "failure_details": [
+        {
+          "id": "Q062",
+          "type": "howto",
+          "question": "How do I remove the camshaft timing gear and the timing chain?",
+          "expected": [
+            [
+              "Toyota-4Runner_2006.pdf",
+              73
+            ]
+          ],
+          "got": [
+            [
+              "Toyota-4Runner_2006.pdf",
+              144
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              47
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              44
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              46
+            ],
+            [
+              "Toyota-4Runner_2006.pdf",
+              93
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "not_run": {
+    "3 RRF + pretrained CE": "keyword-only mode",
+    "4 RRF + fine-tuned CE": "no fine-tuned reranker saved in trained_models/reranker"
+  },
+  "rechunked_keyword_only": {
+    "answerable": 73,
+    "unanswerable": 10,
+    "Recall@5": 0.869,
+    "Precision@5": 0.273,
+    "MRR": 0.766,
+    "Hit@1": 0.616,
+    "Hit@5 (retrieval accuracy)": 0.973,
+    "Citation correctness (top-3 pages)": 0.374,
+    "False no-match rate": 0.0,
+    "Wrong-model retrieval rate": 0.0,
+    "False-evidence rate (not-in-docs questions)": 0.1,
+    "Unanswerable handled correctly": 0.9,
+    "missed": [
+      "Q062",
+      "Q067"
+    ],
+    "failure_details": [
+      {
+        "id": "Q062",
+        "type": "howto",
+        "question": "How do I remove the camshaft timing gear and the timing chain?",
+        "expected": [
+          [
+            "Toyota-4Runner_2006.pdf",
+            73
+          ]
+        ],
+        "got": [
+          [
+            "Toyota-4Runner_2006.pdf",
+            47
+          ],
+          [
+            "Toyota-4Runner_2006.pdf",
+            144
+          ],
+          [
+            "Toyota-4Runner_2006.pdf",
+            46
+          ],
+          [
+            "Toyota-4Runner_2006.pdf",
+            44
+          ],
+          [
+            "Toyota-4Runner_2006.pdf",
+            93
+          ]
+        ]
+      },
+      {
+        "id": "Q067",
+        "type": "follow_up",
+        "question": "Can I fill it myself?",
+        "expected": [
+          [
+            "fortuner-48v-2025.pdf",
+            333
+          ],
+          [
+            "fortuner-48v-2025.pdf",
+            336
+          ]
+        ],
+        "got": [
+          [
+            "fortuner-48v-2025.pdf",
+            332
+          ],
+          [
+            "fortuner-48v-2025.pdf",
+            388
+          ],
+          [
+            "fortuner-48v-2025.pdf",
+            97
+          ],
+          [
+            "fortuner-48v-2025.pdf",
+            394
+          ],
+          [
+            "fortuner-48v-2025.pdf",
+            331
+          ]
+        ]
+      }
+    ]
+  },
+  "chunks_old_vs_rechunked": [
+    1042,
+    1131
+  ],
+  "cross_vehicle_probe": {
+    "chunks_returned_for_other_vehicles": 964,
+    "chunks_from_the_wrong_vehicle": 0
+  },
+  "hit_by_question_type": {
+    "fact": {
+      "baseline": 0.957,
+      "2 BM25+RRF (no FAISS)": 1.0,
+      "n": 23
+    },
+    "follow_up": {
+      "baseline": 0.3,
+      "2 BM25+RRF (no FAISS)": 1.0,
+      "n": 10
+    },
+    "howto": {
+      "baseline": 0.852,
+      "2 BM25+RRF (no FAISS)": 0.963,
+      "n": 27
+    },
+    "symptom": {
+      "baseline": 0.923,
+      "2 BM25+RRF (no FAISS)": 1.0,
+      "n": 13
+    }
+  },
+  "retrieval_failures": [
+    {
+      "id": "Q062",
+      "type": "howto",
+      "question": "How do I remove the camshaft timing gear and the timing chain?",
+      "expected": [
+        [
+          "Toyota-4Runner_2006.pdf",
+          73
+        ]
+      ],
+      "got": [
+        [
+          "Toyota-4Runner_2006.pdf",
+          144
+        ],
+        [
+          "Toyota-4Runner_2006.pdf",
+          47
+        ],
+        [
+          "Toyota-4Runner_2006.pdf",
+          44
+        ],
+        [
+          "Toyota-4Runner_2006.pdf",
+          46
+        ],
+        [
+          "Toyota-4Runner_2006.pdf",
+          93
+        ]
+      ]
+    }
+  ]
+}

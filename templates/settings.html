@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Safety Rules' if section == 'safety' else 'System Settings' }}{% endblock %}
+{% block subtitle %}{{ 'Rules sent to the AI with every question.' if section == 'safety' else 'Search settings and system status.' }}{% endblock %}
+{% block content %}
+{% if section == 'safety' %}
+<div class="row g-3">
+  {% for risk, note in rules %}
+  <div class="col-lg-4"><form class="card-soft h-100" method="post" data-loading="Saving…">{{ csrf_input }}<input type="hidden" name="risk" value="{{ risk }}">
+    <h2><span class="pill {{ 'pill-bad' if risk == 'High' else 'pill-warn' if risk == 'Medium' else 'pill-ok' }}">{{ risk }} risk</span></h2>
+    <textarea class="form-control mb-3" name="note" rows="5" maxlength="600" required>{{ note }}</textarea>
+    <button class="btn btn-primary" type="submit">Save rule</button></form></div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="row g-3">
+  <div class="col-lg-5"><form class="card-soft h-100" method="post" data-loading="Saving…">{{ csrf_input }}
+    <h2>Search</h2><label class="form-label">Passages sent to the AI per question</label>
+    <select class="form-select mb-3" name="top_k">{% for n in ('3', '5', '8', '10') %}<option {{ 'selected' if n == top_k }}>{{ n }}</option>{% endfor %}</select>
+    <div class="hint mb-3">More passages give broader context but a slower, longer answer.</div>
+    <button class="btn btn-primary" type="submit">Save settings</button></form></div>
+  <div class="col-lg-7"><div class="card-soft h-100"><h2>System status</h2>
+    <ul class="list-unstyled mb-0 d-grid gap-2">
+      <li>{% if db_ok %}<i class="bi bi-check-circle-fill text-success me-2"></i>{% else %}<i class="bi bi-x-circle-fill text-danger me-2"></i>{% endif %}MySQL database: <b>{{ db_name }}</b></li>
+      <li>{% if ai_ready %}<i class="bi bi-check-circle-fill text-success me-2"></i>AI key configured{% else %}<i class="bi bi-x-circle-fill text-danger me-2"></i>AI key missing (set OPENROUTER_API_KEY in .env){% endif %}</li>
+      <li><i class="bi bi-cpu me-2 text-primary"></i>Model: <b>{{ llm_model }}</b></li>
+      <li>{% if rag.in_sync %}<i class="bi bi-check-circle-fill text-success me-2"></i>{% else %}<i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>{% endif %}Search index: {{ rag.chunks }} passages, {{ rag.vectors }} vectors</li>
+      <li>{% if ocr_ready %}<i class="bi bi-check-circle-fill text-success me-2"></i>OCR (Tesseract) available{% else %}<i class="bi bi-dash-circle text-secondary me-2"></i>OCR not installed: scanned PDFs show "Needs OCR"{% endif %}</li>
+    </ul></div></div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block subtitle %}Welcome back, {{ me.full_name.split()[0] }}.{% endblock %}
+{% block actions %}
+  {% if me.role == TECH %}<a class="btn btn-primary" href="{{ url_for('chat') }}"><i class="bi bi-chat-dots me-1"></i>Start troubleshooting</a>{% endif %}
+  {% if me.role == ADMIN %}<a class="btn btn-primary" href="{{ url_for('documents') }}"><i class="bi bi-upload me-1"></i>Upload manuals</a>{% endif %}
+{% endblock %}
+{% block content %}
+<div class="row g-3 mb-4">
+  {% for number, label, icon in stats %}
+  <div class="col-6 col-xl-3"><div class="stat"><div class="ico"><i class="bi bi-{{ icon }}"></i></div><div><b>{{ number }}</b><span>{{ label }}</span></div></div></div>
+  {% endfor %}
+</div>
+
+{% if me.role == ADMIN %}
+<div class="row g-3">
+  <div class="col-lg-8">
+    <div class="card-soft">
+      <div class="card-title-row"><h2>Latest documents</h2><a href="{{ url_for('documents') }}" class="btn btn-sm btn-outline-primary">Manage documents</a></div>
+      {% if docs %}<div class="table-wrap"><table class="table table-modern">
+        <thead><tr><th>Document</th><th>Vehicle</th><th>Status</th><th class="text-end">Passages</th></tr></thead>
+        <tbody>{% for d in docs %}<tr><td class="fw-semibold">{{ d.filename }}</td><td>{{ d.model }} / {{ d.generation }}</td>
+          <td><span class="pill {{ {'Indexed': 'pill-ok', 'Failed': 'pill-bad', 'Needs OCR': 'pill-warn'}.get(d.status, 'pill-busy') }}">{{ d.status }}</span></td>
+          <td class="text-end">{{ d.chunk_count }}</td></tr>{% endfor %}</tbody></table></div>
+      {% else %}<div class="empty"><i class="bi bi-file-earmark-pdf"></i>No documents yet. Upload a manual to start.</div>{% endif %}
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card-soft">
+      <h2>System health</h2>
+      <ul class="list-unstyled mb-0 d-grid gap-2">
+        <li><i class="bi bi-database-check text-success me-2"></i>MySQL connected</li>
+        <li>{% if rag.in_sync %}<i class="bi bi-check-circle-fill text-success me-2"></i>Search index: {{ rag.vectors }} vectors in sync
+            {% else %}<i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Search index out of sync ({{ rag.vectors }} / {{ rag.chunks }}){% endif %}</li>
+        <li>{% if ai_ready %}<i class="bi bi-check-circle-fill text-success me-2"></i>AI key configured
+            {% else %}<i class="bi bi-x-circle-fill text-danger me-2"></i>AI key missing in .env{% endif %}</li>
+        <li>{% if pending_users %}<i class="bi bi-person-exclamation text-warning me-2"></i><a href="{{ url_for('users') }}">{{ pending_users }} account(s) awaiting approval</a>
+            {% else %}<i class="bi bi-person-check text-success me-2"></i>No accounts waiting{% endif %}</li>
+        <li>{% if failed_docs %}<i class="bi bi-file-earmark-excel text-danger me-2"></i><a href="{{ url_for('documents') }}">{{ failed_docs }} document(s) need attention</a>
+            {% else %}<i class="bi bi-file-earmark-check text-success me-2"></i>All documents processed{% endif %}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="card-soft">
+  <div class="card-title-row"><h2>{{ 'My recent work orders' if me.role == TECH else 'Recent work orders' }}</h2>
+    <a href="{{ url_for('orders' if me.role == TECH else 'review') }}" class="btn btn-sm btn-outline-primary">View all</a></div>
+  {% if orders %}<div class="table-wrap"><table class="table table-modern">
+    <thead><tr><th>Order</th><th>Vehicle</th><th>Issue</th><th>Risk</th><th>Status</th></tr></thead>
+    <tbody>{% for o in orders %}<tr>
+      <td><a class="fw-semibold text-decoration-none" href="{{ url_for('order_detail', code=o.code) }}">{{ o.code }}</a></td>
+      <td>{{ o.model }}, {{ o.generation }}</td><td class="text-truncate" style="max-width:320px">{{ o.issue }}</td>
+      <td><span class="pill {{ 'pill-bad' if o.risk == 'High' else 'pill-warn' if o.risk == 'Medium' else '' }}">{{ o.risk }}</span></td>
+      <td><span class="pill pill-blue">{{ o.status }}</span></td></tr>{% endfor %}</tbody></table></div>
+  {% else %}<div class="empty"><i class="bi bi-clipboard"></i>No work orders yet.{% if me.role == TECH %} Ask AutoAssist a question, then create a work order from the answer.{% endif %}</div>{% endif %}
+</div>
+{% endif %}
+{% endblock %}

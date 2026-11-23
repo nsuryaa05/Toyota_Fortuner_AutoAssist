@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Fault Code Management{% endblock %}
+{% block subtitle %}Upload fault code lists (CSV or PDF). Technicians use them to look up a code and get its meaning.{% endblock %}
+{% block actions %}<a class="btn btn-outline-primary" href="{{ url_for('fault_code_template') }}"><i class="bi bi-download me-1"></i>CSV template</a>{% endblock %}
+{% block content %}
+<div class="card-soft">
+  <h2>Upload fault code files</h2>
+  <form method="post" action="{{ url_for('fault_code_upload') }}" enctype="multipart/form-data" data-loading="Reading file…">{{ csrf_input }}
+    <label class="form-label" for="fcFiles">CSV or PDF files (you can select several)</label>
+    <input class="form-control mb-3" type="file" id="fcFiles" name="files" accept=".csv,.pdf,text/csv,application/pdf" multiple required>
+    <div class="row g-2 mb-3">
+      <div class="col-md-4"><label class="form-label">Car model <span class="hint">(optional)</span></label>
+        <input class="form-control" name="model" list="fcModels" maxlength="80" placeholder="Leave empty for all vehicles"></div>
+      <div class="col-md-4"><label class="form-label">Generation <span class="hint">(optional)</span></label>
+        <input class="form-control" name="generation" list="fcGens" maxlength="40"></div>
+    </div>
+    <datalist id="fcModels">{% for m in models %}<option value="{{ m }}"></option>{% endfor %}</datalist>
+    <datalist id="fcGens">{% for gn in generations %}<option value="{{ gn }}"></option>{% endfor %}</datalist>
+    <button class="btn btn-primary"><i class="bi bi-cloud-upload me-1"></i>Upload</button>
+    <div class="hint mt-2"><b>CSV:</b> first row is a header with <code>code</code> and <code>description</code> (optional: <code>system</code>, <code>causes</code>, <code>action</code>, <code>model</code>, <code>generation</code>).
+      <b>PDF:</b> each entry starts on a line with the code (e.g. <code>P0171 System too lean</code>); the lines below belong to it. Scanned PDFs need a CSV instead.</div>
+  </form>
+</div>
+
+<div class="card-soft">
+  <div class="card-title-row"><h2>Uploaded lists ({{ files|length }})</h2><span class="hint">{{ total }} fault code entries in total</span></div>
+  {% if files %}<div class="table-wrap"><table class="table table-modern">
+    <thead><tr><th>File</th><th>Type</th><th>Applies to</th><th class="text-end">Codes</th><th>Uploaded</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>{% for f in files %}<tr>
+      <td><b>{{ f.filename }}</b></td><td><span class="pill">{{ f.file_type|upper }}</span></td>
+      <td>{% if f.model %}{{ f.model }}{% if f.generation %}, {{ f.generation }}{% endif %}{% else %}All vehicles{% endif %}</td>
+      <td class="text-end">{{ f.code_count }}</td>
+      <td class="text-nowrap">{{ f.uploaded_at|dt }}{% if f.uploader %}<div class="hint">{{ f.uploader.username }}</div>{% endif %}</td>
+      <td class="text-end text-nowrap">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('fault_code_file', file_id=f.id) }}" target="_blank" title="Open original"><i class="bi bi-eye"></i></a>
+        <form class="d-inline" method="post" action="{{ url_for('fault_code_delete', file_id=f.id) }}" onsubmit="return confirm('Remove this file and its {{ f.code_count }} fault codes?');">{{ csrf_input }}
+          <button class="btn btn-sm btn-outline-danger" title="Remove"><i class="bi bi-trash"></i></button></form></td></tr>{% endfor %}</tbody></table></div>
+  {% else %}<div class="empty"><i class="bi bi-file-earmark-spreadsheet"></i>No fault code files yet. Upload a CSV or PDF above.</div>{% endif %}
+</div>
+{% endblock %}

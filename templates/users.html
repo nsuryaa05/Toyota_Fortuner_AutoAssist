@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}User Management{% endblock %}
+{% block subtitle %}Approve new accounts, set roles and manage access.{% endblock %}
+{% block actions %}<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal"
+  onclick="fillUser()"><i class="bi bi-person-plus me-1"></i>Add user</button>{% endblock %}
+{% block content %}
+<div class="card-soft">
+  <form class="row g-2 mb-3" method="get">
+    <div class="col-sm-6 col-md-4"><input class="form-control" name="q" value="{{ q }}"
+        placeholder="Search name, username or email"></div>
+    <div class="col-auto"><button class="btn btn-outline-primary"><i class="bi bi-search me-1"></i>Search</button></div>
+  </form>
+  <div class="table-wrap">
+    <table class="table table-modern">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Last login</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>{% for u in rows %}<tr>
+          <td><b>{{ u.full_name }}</b>
+            <div class="hint">{{ u.username }} · {{ u.email }}</div>
+          </td>
+          <td>{{ u.role }}{% if u.status == 'pending' and u.requested_role %}<div class="hint">Requested: <b>{{
+                u.requested_role }}</b></div>{% endif %}</td>
+          <td><span
+              class="pill {{ {'active': 'pill-ok', 'pending': 'pill-warn', 'disabled': 'pill-bad'}[u.status] }}">{{
+              u.status|capitalize }}</span></td>
+          <td class="text-nowrap">{{ u.last_login|dt }}</td>
+          <td class="text-end">
+            {% if u.status == 'pending' %}
+            <form class="d-inline-flex gap-1" method="post" action="{{ url_for('user_approve', uid=u.id) }}">{{
+              csrf_input }}
+              <select class="form-select form-select-sm" name="role" style="width:auto">{% for r in roles %}<option
+                  {{ 'selected' if r==(u.requested_role or u.role) }}>{{ r }}</option>{% endfor %}</select>
+              <button class="btn btn-sm btn-success">Approve</button>
+            </form>{% endif %}
+            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#userModal"
+              onclick='fillUser({{ {"id": u.id, "full_name": u.full_name, "email": u.email, "username": u.username, "role": u.role, "status": u.status}|tojson }})'><i
+                class="bi bi-pencil"></i></button>
+            {% if u.id != me.id %}<form class="d-inline" method="post" action="{{ url_for('user_delete', uid=u.id) }}"
+              onsubmit="return confirm('Delete {{ u.username }}?');">{{ csrf_input }}
+              <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </form>{% endif %}
+          </td>
+        </tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="userModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" method="post" action="{{ url_for('user_save') }}" data-loading="Saving…">{{ csrf_input
+      }}
+      <input type="hidden" name="id" id="u_id">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userTitle">Add user</h5><button type="button" class="btn-close"
+          data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-12"><label class="form-label">Full name</label><input class="form-control" name="full_name"
+              id="u_full_name" required maxlength="120"></div>
+          <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" type="email"
+              name="email" id="u_email" required></div>
+          <div class="col-md-6"><label class="form-label">Username</label><input class="form-control" name="username"
+              id="u_username" required pattern="[A-Za-z0-9_.\-]{3,30}"></div>
+          <div class="col-md-6"><label class="form-label">Role</label><select class="form-select" name="role"
+              id="u_role">{% for r in roles %}<option>{{ r }}</option>{% endfor %}</select></div>
+          <div class="col-md-6"><label class="form-label">Status</label><select class="form-select" name="status"
+              id="u_status">{% for s in statuses %}<option>{{ s }}</option>{% endfor %}</select></div>
+          <div class="col-12"><label class="form-label">Password <span class="hint"
+                id="pwHint">(required)</span></label><input class="form-control" type="password" name="password"
+              id="u_password" autocomplete="new-password">
+            <div class="hint mt-1">At least 8 characters with a letter and a number. Leave empty when editing to keep
+              the current password.</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-light"
+          data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="submit">Save user</button></div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  function fillUser(u) {
+    u = u || {role: 'Technician', status: 'active'};
+    document.getElementById('userTitle').textContent = u.id ? 'Edit user' : 'Add user';
+    document.getElementById('pwHint').textContent = u.id ? '(optional)' : '(required)';
+    ['id', 'full_name', 'email', 'username', 'role', 'status'].forEach(function (k) {document.getElementById('u_' + k).value = u[k] === undefined ? '' : u[k];});
+    document.getElementById('u_password').value = '';
+  }
+</script>{% endblock %}

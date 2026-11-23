@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block auth %}<div class="container py-5" style="max-width:640px">{{ self.content() }}</div>{% endblock %}
+{% block content %}
+<div class="card-soft text-center py-5">
+  <div class="display-5 fw-bold text-primary">{{ code }}</div>
+  <h2 class="h4 mt-2">{{ title }}</h2>
+  <p class="text-muted mb-4">{{ message }}</p>
+  <a class="btn btn-primary" href="{{ url_for('index') }}">Go to the start page</a>
+</div>
+{% endblock %}
