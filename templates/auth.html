@@ -52,7 +52,7 @@
         <form method="post" action="{{ url_for('resend_otp') }}" class="mt-3 text-center">
           {{ csrf_input }}<button class="btn btn-link" type="submit">Resend verification code</button>
         </form>
-        <p class="mt-3 text-center text-muted"><a href="{{url_for('login')}}">Back to sign in</a></p>
+        <!-- <p class="mt-3 text-center text-muted"><a href="{{url_for('login')}}">Back to sign in</a></p> -->
 
       {% elif mode == 'forgot_password' %}
         <h1>Forgot password?</h1>
