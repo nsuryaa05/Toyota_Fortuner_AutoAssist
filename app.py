@@ -259,7 +259,7 @@ def send_email_otp(user, purpose):
         log.exception("Brevo OTP delivery failed for user id %s.", user.id)
 
         db.session.delete(challenge)
-        db.session.commit()
+        db.session.commit()   
 
         return None
 
