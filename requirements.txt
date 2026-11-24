@@ -5,9 +5,9 @@ PyMySQL>=1.1
 cryptography>=42
 python-dotenv>=1.0
 PyMuPDF>=1.24
-# sentence-transformers>=3.0,<6.0
+sentence-transformers>=3.0,<6.0
 faiss-cpu>=1.8
-# numpy
+numpy
 openai>=1.30
 gunicorn
 requests
