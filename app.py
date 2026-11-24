@@ -131,7 +131,7 @@ def ai_key_ready():
 
 
 def mail_settings_ready():
-    return bool(os.getenv("BREVO_API_KEY", "").strip())
+    return bool(os.getenv("BREVO_API_KEY","").strip())
 
 
 def otp_digest(user_id, purpose, code):
@@ -156,7 +156,7 @@ def send_email_otp(user, purpose):
     """Create and send a two-minute OTP using Brevo API."""
 
     if not mail_settings_ready():
-        log.error("BREVO_API_KEY is not configured.")
+        log.error("BREVO_API_KEY is not configured .env")
         return None
 
     now = datetime.now()
@@ -212,7 +212,7 @@ def send_email_otp(user, purpose):
     )
 
     api_key = os.getenv("BREVO_API_KEY", "").strip()
-    sender_email = os.getenv("BREVO_FROM_EMAIL", "").strip()
+    sender_email = os.getenv("BREVO_FROM_EMAIL","").strip()
 
     if not sender_email:
         log.error("BREVO_FROM_EMAIL is not configured.")
