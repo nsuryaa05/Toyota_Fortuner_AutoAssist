@@ -11,13 +11,11 @@ for _name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
 import hashlib
 import hmac
 import logging
-import smtplib
-import ssl
+import requests
 import re
 import secrets
 import threading
 from datetime import datetime, timedelta
-from email.message import EmailMessage
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
@@ -133,7 +131,7 @@ def ai_key_ready():
 
 
 def mail_settings_ready():
-    return bool(os.getenv("MAIL_USERNAME", "").strip() and os.getenv("MAIL_PASSWORD", "").strip())
+    return bool(os.getenv("BREVO_API_KEY", "").strip())
 
 
 def otp_digest(user_id, purpose, code):
@@ -155,21 +153,35 @@ def otp_cooldown_remaining(user, purpose, now=None):
 
 
 def send_email_otp(user, purpose):
-    """Create a two-minute OTP challenge and email it. The raw OTP is never stored."""
+    """Create and send a two-minute OTP using Brevo API."""
+
     if not mail_settings_ready():
-        log.error("Gmail OTP is not configured. Set MAIL_USERNAME and MAIL_PASSWORD in .env.")
+        log.error("BREVO_API_KEY is not configured.")
         return None
 
     now = datetime.now()
-    previous = (OtpChallenge.query.filter_by(user_id=user.id, purpose=purpose)
-                .order_by(OtpChallenge.created_at.desc()).first())
+
+    previous = (
+        OtpChallenge.query.filter_by(
+            user_id=user.id,
+            purpose=purpose
+        )
+        .order_by(OtpChallenge.created_at.desc())
+        .first()
+    )
+
     if previous and (now - previous.created_at).total_seconds() < OTP_RESEND_SECONDS:
         if not previous.consumed_at and previous.expires_at > now:
-            return previous  # reuse the active code; do not send repeated emails
+            return previous
         return None
 
     code = f"{secrets.randbelow(1_000_000):06d}"
-    OtpChallenge.query.filter_by(user_id=user.id, purpose=purpose).delete(synchronize_session=False)
+
+    OtpChallenge.query.filter_by(
+        user_id=user.id,
+        purpose=purpose
+    ).delete(synchronize_session=False)
+
     challenge = OtpChallenge(
         user_id=user.id,
         purpose=purpose,
@@ -178,47 +190,77 @@ def send_email_otp(user, purpose):
         expires_at=now + timedelta(seconds=OTP_TTL_SECONDS),
         attempts=0,
     )
+
     db.session.add(challenge)
     db.session.commit()
 
-    username = os.getenv("MAIL_USERNAME", "").strip()
-    password = os.getenv("MAIL_PASSWORD", "").replace(" ", "").strip()
-    host = os.getenv("MAIL_SERVER", "smtp.gmail.com").strip()
-    sender = os.getenv("MAIL_DEFAULT_SENDER", username).strip() or username
     purpose_text = "sign-in" if purpose == "login" else "password reset"
-    message = EmailMessage()
-    message["Subject"] = f"Toyota Fortuner AutoAssist – {purpose_text} verification code"
-    message["From"] = sender
-    message["To"] = user.email
-    message.set_content(
+
+    subject = (
+        f"Toyota Fortuner AutoAssist – "
+        f"{purpose_text} verification code"
+    )
+
+    email_text = (
         f"Hello {user.full_name},\n\n"
-        f"Your Toyota Fortuner AutoAssist {purpose_text} code is: {code}\n\n"
+        f"Your Toyota Fortuner AutoAssist {purpose_text} "
+        f"code is: {code}\n\n"
         "This code expires in 2 minutes and can be used only once. "
-        "Do not share it with anyone. If you did not request this code, ignore this email.\n\n"
+        "Do not share it with anyone. If you did not request this code, "
+        "ignore this email.\n\n"
         "Toyota Fortuner AutoAssist"
     )
-    try:
-        port = int(os.getenv("MAIL_PORT", "465"))
-        if not 1 <= port <= 65535:
-            raise ValueError("MAIL_PORT must be between 1 and 65535")
-        timeout = 20
-        use_ssl = os.getenv("MAIL_USE_SSL", "1" if port == 465 else "0") == "1"
-        if use_ssl:
-            with smtplib.SMTP_SSL(host, port, timeout=timeout, context=ssl.create_default_context()) as server:
-                server.login(username, password)
-                server.send_message(message)
-        else:
-            with smtplib.SMTP(host, port, timeout=timeout) as server:
-                server.ehlo()
-                server.starttls(context=ssl.create_default_context())
-                server.ehlo()
-                server.login(username, password)
-                server.send_message(message)
-        return challenge
-    except Exception:
-        log.exception("Gmail OTP delivery failed for user id %s.", user.id)
+
+    api_key = os.getenv("BREVO_API_KEY", "").strip()
+    sender_email = os.getenv("BREVO_FROM_EMAIL", "").strip()
+
+    if not sender_email:
+        log.error("BREVO_FROM_EMAIL is not configured.")
         db.session.delete(challenge)
         db.session.commit()
+        return None
+
+    payload = {
+        "sender": {
+            "name": "Toyota Fortuner AutoAssist",
+            "email": sender_email,
+        },
+        "to": [
+            {
+                "email": user.email,
+                "name": user.full_name,
+            }
+        ],
+        "subject": subject,
+        "textContent": email_text,
+    }
+
+    headers = {
+        "accept": "application/json",
+        "api-key": api_key,
+        "content-type": "application/json",
+    }
+
+    try:
+        response = requests.post(
+            "https://api.brevo.com/v3/smtp/email",
+            headers=headers,
+            json=payload,
+            timeout=20,
+        )
+
+        response.raise_for_status()
+
+        log.info("OTP email sent successfully to user id %s.", user.id)
+
+        return challenge
+
+    except requests.RequestException:
+        log.exception("Brevo OTP delivery failed for user id %s.", user.id)
+
+        db.session.delete(challenge)
+        db.session.commit()
+
         return None
 
 
@@ -543,7 +585,7 @@ def resend_otp():
         session["otp_challenge_id"] = challenge.id
         flash("A new verification code has been sent. The previous code is no longer valid.", "success")
     else:
-        flash("The email could not be sent. Check Gmail SMTP settings in .env.", "error")
+        flash("The email could not be sent. Check the Brevo email configuration", "error")
     return redirect(url_for("verify_login_otp" if purpose == "login" else "verify_reset_otp"))
 
 
